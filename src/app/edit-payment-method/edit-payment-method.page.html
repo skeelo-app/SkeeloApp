@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{card.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">
+              <ion-text color="primary">
+                <h3>Número do cartão</h3>
+              </ion-text>
+            </ion-label>
+            <ion-input disabled value="&bull;&bull;&bull;&bull; {{card.last_numbers}}"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">
+              <ion-text color="primary">
+                <h3>Validade</h3>
+              </ion-text>
+            </ion-label>
+            <ion-input [value]="card.valid" inputmode="numeric"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">
+              <ion-text color="primary">
+                <h3>CVV</h3>
+              </ion-text>
+            </ion-label>
+            <ion-input inputmode="numeric"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">
+              <ion-text color="primary">
+                <h3>Nome do titular</h3>
+              </ion-text>
+            </ion-label>
+            <ion-input [value]="card.titular_name"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">
+              <ion-text color="primary">
+                <h3>CPF</h3>
+              </ion-text>
+            </ion-label>
+            <ion-input [value]="card.titular_cpf" inputmode="numeric"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">
+              <ion-text color="primary">
+                <h3>Nome do método</h3>
+              </ion-text>
+            </ion-label>
+            <ion-input [value]="card.name"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row padding-top>
+        <ion-col>
+          <ion-button color="danger" size="block">
+            Limpar
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="primary" size="block">
+            Salvar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

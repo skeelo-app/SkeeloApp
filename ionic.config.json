@@ -1,0 +1,8 @@
+{
+  "name": "Skeelo",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "80415ae0"
+}

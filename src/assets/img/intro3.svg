@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="201.712" height="304.856" viewBox="0 0 201.712 304.856">
+  <defs>
+    <filter id="Retângulo_154" x="26.856" y="0" width="148" height="188" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Retângulo_153" x="0" y="103.144" width="201.712" height="201.712" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_17" data-name="Grupo 17" transform="translate(-87.144 -148)">
+    <g transform="matrix(1, 0, 0, 1, 87.14, 148)" filter="url(#Retângulo_154)">
+      <rect id="Retângulo_154-2" data-name="Retângulo 154" width="130" height="170" rx="8" transform="translate(35.86 6)" fill="#fff"/>
+    </g>
+    <line id="Linha_36" data-name="Linha 36" x2="106" transform="translate(135.5 178.5)" fill="none" stroke="#d1d1d1" stroke-width="1"/>
+    <path id="box-full-solid" d="M35.987,33.8,29.96,23.811,23.941,33.8a4.55,4.55,0,0,1-5.128,2.025L5.961,32.154v7.687A2.99,2.99,0,0,0,8.23,42.747L28.5,47.819a6.094,6.094,0,0,0,2.906,0L51.69,42.747a3.006,3.006,0,0,0,2.269-2.906V32.154L41.115,35.82A4.547,4.547,0,0,1,35.987,33.8ZM18.167,13.471A5.932,5.932,0,0,1,17.961,12a6,6,0,0,1,12,0,5.891,5.891,0,0,1-.769,2.878l.769.094,14.558-1.847,3.347-9.215a1.5,1.5,0,0,0-.9-1.922L41.762.094a1.5,1.5,0,0,0-1.922.9L35.931,11.718A11.987,11.987,0,0,0,11.961,12c0,.234.056.459.066.694ZM4.949,15.843.121,25.48a1.528,1.528,0,0,0,.947,2.156l18.552,5.3a1.541,1.541,0,0,0,1.734-.684L29.96,18,6.5,15.008A1.532,1.532,0,0,0,4.949,15.843ZM59.8,25.48l-4.828-9.637a1.531,1.531,0,0,0-1.566-.834L29.96,18l8.6,14.258a1.541,1.541,0,0,0,1.734.684l18.552-5.3A1.544,1.544,0,0,0,59.8,25.48Z" transform="translate(159.042 199)" fill="#1a87ff"/>
+    <text id="Um_monte_de_coisas_" data-name="Um monte de coisas!" transform="translate(135 170)" fill="#1a87ff" font-size="10" font-family="Montserrat-Regular, Montserrat"><tspan x="0" y="0">Um monte de coisas!</tspan></text>
+    <g transform="matrix(1, 0, 0, 1, 87.14, 148)" filter="url(#Retângulo_153)">
+      <rect id="Retângulo_153-2" data-name="Retângulo 153" width="150" height="150" rx="8" transform="matrix(0.97, 0.26, -0.26, 0.97, 47.82, 109.14)" fill="#fff"/>
+    </g>
+    <g id="Elipse_3" data-name="Elipse 3" transform="matrix(0.966, 0.259, -0.259, 0.966, 130.252, 321.103)" fill="#fff" stroke="#d1d1d1" stroke-width="1">
+      <circle cx="12" cy="12" r="12" stroke="none"/>
+      <circle cx="12" cy="12" r="11.5" fill="none"/>
+    </g>
+  </g>
+</svg>

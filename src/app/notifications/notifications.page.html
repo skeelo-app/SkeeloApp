@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Notificações</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full">
+    <ion-item *ngFor="let option of notifications" detail="false">
+      <ion-label text-wrap>
+        <ion-text color="primary">
+          <h3>{{option.name}}</h3>
+        </ion-text>
+        <ion-text color="primary">
+          <p><i>{{option.desc}}</i></p>
+        </ion-text>
+      </ion-label>
+      <ion-toggle [(ngModel)]="option.value" name="{{option.id}}" color="primary" (ionChange)="toggle(option.id, option.value)" ></ion-toggle>
+    </ion-item>
+  </ion-list>
+</ion-content>

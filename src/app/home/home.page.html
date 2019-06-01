@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-item lines="none">
+    <ion-icon color="primary" slot="start" src="../../assets/icons/user-circle-solid.svg"></ion-icon>
+    <ion-label>
+      <ion-text color="primary">
+        {{user.name}}
+      </ion-text>
+    </ion-label>
+    <ion-icon color="primary" slot="end" src="../../assets/icons/chevron-right-solid.svg"></ion-icon>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <div search>
+    <ion-searchbar searchIcon="../../assets/icons/search-solid.svg" placeholder="Pesquise qualquer coisa"></ion-searchbar>
+  </div>
+
+  <div margin-top>
+    <ion-text color="purple">
+      <p>Escolha por onde começar</p>
+    </ion-text>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button color="purple" margin-right>
+            <ion-ripple-effect></ion-ripple-effect>
+            Produtos
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="purplelight" margin-left>
+            <ion-ripple-effect></ion-ripple-effect>
+            Mercados
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div promotions>
+    <ion-text color="primary">
+      <p>Promoções perto de você</p>
+    </ion-text>
+    <ion-slides [options]="slideOpts">
+      <ion-slide *ngFor="let item of promotions" routerLink="{{item.routerLink}}">
+        <ion-text>
+          {{item.text}}
+        </ion-text>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div lastOrder>
+    <ion-text color="primary">
+      <p>Seu último pedido</p>
+    </ion-text>
+    <ion-card routerLink="/order-details/{{lastOrder.id}}">
+      <ion-item lines="none">
+        <ion-img src="../../assets/img/figure.png"></ion-img>
+        <ion-col>
+          <ion-label color="primary">
+            <ion-text>
+              <h3>{{lastOrder.store}}</h3>
+            </ion-text>
+            <ion-text>
+              <p>{{lastOrder.date}}</p>
+            </ion-text>
+            <ion-text>
+              <p>{{lastOrder.items}} itens</p>
+            </ion-text>
+          </ion-label>
+        </ion-col>
+        <ion-col class="text-end">
+          <ion-label>
+            <ion-text color="primary">
+              {{lastOrder.price}}
+            </ion-text>
+          </ion-label>
+        </ion-col>
+      </ion-item>
+    </ion-card>
+  </div>
+</ion-content>
