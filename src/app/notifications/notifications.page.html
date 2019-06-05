@@ -9,16 +9,30 @@
 
 <ion-content>
   <ion-list lines="full">
+    <ion-item lines="none">
+      <ion-label>
+        <ion-text text-wrap color="medium">
+          <h3>Como você quer receber notificações de promoções e novidades da Skeelo</h3>
+        </ion-text>
+      </ion-label>
+    </ion-item>
     <ion-item *ngFor="let option of notifications" detail="false">
       <ion-label text-wrap>
         <ion-text color="primary">
           <h3>{{option.name}}</h3>
         </ion-text>
-        <ion-text color="primary">
+        <!-- <ion-text color="primary">
           <p><i>{{option.desc}}</i></p>
-        </ion-text>
+        </ion-text> -->
       </ion-label>
       <ion-toggle [(ngModel)]="option.value" name="{{option.id}}" color="primary" (ionChange)="toggle(option.id, option.value)" ></ion-toggle>
+    </ion-item>
+    <ion-item color="primary" lines="none">
+      <ion-label>
+        <ion-text text-wrap color="light">
+          <h3>Notificações de pedidos não serão desativadas, pois são fundamentais para sua experiência.</h3>
+        </ion-text>
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

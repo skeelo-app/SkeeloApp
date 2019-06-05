@@ -12,14 +12,22 @@ export class NotificationsPage implements OnInit {
   notifications = [
     {
       id: 1,
-      name: 'Todas as Notificações',
-      desc: 'Habilitar todas as notificações',
+      name: 'Notificações Push',
       value: true
     },
     {
       id: 2,
-      name: 'Notificações Promocionais',
-      desc: 'Habilitar somente as notificações de promoções',
+      name: 'E-mail',
+      value: true
+    },
+    {
+      id: 3,
+      name: 'WhatsApp',
+      value: true
+    },
+    {
+      id: 4,
+      name: 'SMS',
       value: true
     }
   ];
