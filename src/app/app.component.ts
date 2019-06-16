@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-  // rootPage: any = 'intro';
-  
+  rootPage: any = 'intro';
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -28,17 +28,17 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      // this.storage.get('showIntro').then((value) => {
-      //   if (value) {
-      //     this.rootPage = '/intro';
-      //     console.log(this.rootPage);
-      //     this.router.navigateByUrl(this.rootPage);
-      //   } else {
-      //     this.rootPage = '/tabs';
-      //     console.log(this.rootPage);
-      //     this.router.navigateByUrl(this.rootPage);
-      //   }
-      // });
+      this.storage.get('showIntro').then((value) => {
+        if (value) {
+          this.rootPage = '/intro';
+          // console.log(this.rootPage);
+          this.router.navigateByUrl(this.rootPage);
+        } else {
+          this.rootPage = '/tabs';
+          // console.log(this.rootPage);
+          this.router.navigateByUrl(this.rootPage);
+        }
+      });
     });
   }
 }

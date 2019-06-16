@@ -34,6 +34,11 @@ export class SettingsPage implements OnInit {
       name: 'Seja um Parceiro',
       icon: 'store-solid',
       routerLink: '/be-partner'
+    },
+    {
+      name: 'Reportar Bug',
+      icon: 'bug-solid',
+      routerLink: '/bug-report'
     }
   ];
 

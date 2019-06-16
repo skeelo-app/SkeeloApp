@@ -97,45 +97,63 @@
 				</ion-label>
 			</ion-item>
 			<ion-grid>
-				<ion-row>
-					<ion-col>
-						<ion-item>
-							<ion-label position="stacked">
-								<ion-text color="primary">
-									<h3>E-mail</h3>
-								</ion-text>
-							</ion-label>
-							<ion-input></ion-input>
-						</ion-item>
-					</ion-col>
-				</ion-row>
-				<ion-row>
-					<ion-col>
-						<ion-item>
-							<ion-label position="stacked">
-								<ion-text color="primary">
-									<h3>Senha</h3>
-								</ion-text>
-							</ion-label>
-							<ion-input></ion-input>
-						</ion-item>
-					</ion-col>
-				</ion-row>
-				<ion-row padding-top>
-					<ion-col>
-						<ion-button size="block" color="primary" (click)="login()">
-							<ion-ripple-effect></ion-ripple-effect>
-							Continuar
-						</ion-button>
-					</ion-col>
-				</ion-row>
-				<ion-row>
-					<ion-col size="7" push="2.5">
-						<ion-text color="primary">
-							<p>Ao clicar em 'Continuar' você concorda com nossos <a href="#">Termos de uso</a> e <a href="#">políticas de privacidade</a>.</p>
-						</ion-text>
-					</ion-col>
-				</ion-row>
+				<form [formGroup]="loginForm">
+					<ion-row>
+						<ion-col>
+							<ion-item [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty" [class.valid]="loginForm.controls.email.valid && loginForm.controls.email.dirty">
+								<ion-label position="stacked">
+									<ion-text color="primary">
+										<h3>E-mail</h3>
+									</ion-text>
+								</ion-label>
+								<ion-input type="email" required formControlName="email"></ion-input>
+							</ion-item>
+						</ion-col>
+					</ion-row>
+					<ion-row *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty">
+						<ion-col>
+							<ion-item lines="none">
+								<p class="invalidmessage">Por favor, insira um e-mail válido.</p>
+							</ion-item>
+						</ion-col>
+					</ion-row>
+
+					<ion-row>
+						<ion-col>
+							<ion-item [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty" [class.valid]="loginForm.controls.password.valid && loginForm.controls.password.dirty">
+								<ion-label position="stacked">
+									<ion-text color="primary">
+										<h3>Senha</h3>
+									</ion-text>
+								</ion-label>
+								<ion-input type="password" required formControlName="password"></ion-input>
+							</ion-item>
+						</ion-col>
+					</ion-row>
+					<ion-row *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
+						<ion-col>
+							<ion-item lines="none">
+								<p class="invalidmessage">Por favor, insira uma senha válida.</p>
+							</ion-item>
+						</ion-col>
+					</ion-row>
+
+					<ion-row padding-top>
+						<ion-col>
+							<ion-button size="block" color="primary" [disabled]="!loginForm.valid" (click)="login()">
+								<ion-ripple-effect></ion-ripple-effect>
+								Continuar
+							</ion-button>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="7" push="2.5">
+							<ion-text color="primary">
+								<p>Ao clicar em 'Continuar' você concorda com nossos <a href="#">Termos de uso</a> e <a href="#">políticas de privacidade</a>.</p>
+							</ion-text>
+						</ion-col>
+					</ion-row>
+				</form>
 			</ion-grid>
 		</ion-slide>
 	</ion-slides>

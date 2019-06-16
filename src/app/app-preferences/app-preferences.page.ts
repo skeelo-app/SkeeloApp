@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-preferences',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppPreferencesPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private storage: Storage,
+    private router: Router
+  ) { }
 
   menu = [
     {
@@ -23,6 +28,13 @@ export class AppPreferencesPage implements OnInit {
   ];
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.storage.set('showIntro', true).then((value) => {
+      console.log(value);
+    });
+    this.router.navigateByUrl('/intro');
   }
 
 }

@@ -1,74 +1,85 @@
 :host {
     ion-slides {
-        height: 100%;
-        background-color: var(--ion-color-white);
+			height: 100%;
+			background-color: var(--ion-color-white);
     }
     ion-slide[slide1] {
-        height: 100%;
-        text-align: center;
-        ion-item[toolbar] {
-            top: 0;
-            position: fixed;
-            width: 100%;
-            --min-height: 48px !important;
-            ion-text {
-              font-weight: 500 !important;
-            }
-            ion-label {
-                text-align: center;
-            }
-            ion-icon {
-              font-size: 1.3em;
-            }
-        }
+			height: 100%;
+			text-align: center;
+			ion-item[toolbar] {
+				top: 0;
+				position: fixed;
+				width: 100%;
+				--min-height: 48px !important;
+				ion-text {
+					font-weight: 500 !important;
+				}
+				ion-label {
+						text-align: center;
+				}
+				ion-icon {
+					font-size: 1.3em;
+				}
+			}
     }
     ion-grid, ion-row, ion-col {
-        margin: 0;
-        padding: 0;
+			margin: 0;
+			padding: 0;
     }
     ion-button {
-        --border-radius: 4px;
-        ion-icon {
-            width: 2em;
-            height: 2em;
-        }
-        -webkit-margin-start: 16px;
-        -webkit-margin-end: 16px;
+			--border-radius: 4px;
+			ion-icon {
+				width: 2em;
+				height: 2em;
+			}
+			-webkit-margin-start: 16px;
+			-webkit-margin-end: 16px;
     }
     ion-slide[slide2] {
-        ion-item[toolbar] {
-            top: 0;
-            position: fixed;
-            width: 100%;
-            --min-height: 48px !important;
-            ion-text {
-              font-weight: 500 !important;
-            }
-            ion-label {
-                text-align: center;
-            }
-            ion-icon {
-              font-size: 1.3em;
-            }
-        }
-        background-image: url('../../assets/img/logo-nut-colored.svg');
-        background-repeat: no-repeat;
-        background-position-y: 135%;
-        background-position-x: 350%;
-        p {
-            font-size: 11px;
-        }
-        ion-item {
-            -webkit-padding-start: 0;
-            -webkit-padding-end: 0;
-            --padding-start: 16px;
-            --padding-end: 16px;
-        }
-        h3 {
-        font-weight: 600;
-        }
-        ion-row[padding-top] {
-            padding-top: 16px;
-        }
+			ion-item[toolbar] {
+				top: 0;
+				position: fixed;
+				width: 100%;
+				--min-height: 48px !important;
+				ion-text {
+					font-weight: 500 !important;
+				}
+				ion-label {
+						text-align: center;
+				}
+				ion-icon {
+					font-size: 1.3em;
+				}
+			}
+			background-image: url('../../assets/img/logo-nut-colored.svg');
+			background-repeat: no-repeat;
+			background-position-y: 135%;
+			background-position-x: 350%;
+			p {
+					font-size: 11px;
+			}
+			ion-item {
+					-webkit-padding-start: 0;
+					-webkit-padding-end: 0;
+					--padding-start: 16px;
+					--padding-end: 16px;
+			}
+			h3 {
+			font-weight: 600;
+			}
+			ion-row[padding-top] {
+					padding-top: 16px;
+			}
+			.invalid {
+				--border-color: var(--ion-color-danger);
+			}
+			.valid {
+				--border-color: var(--ion-color-success);
+			}
+			p.invalidmessage {
+				font-weight: bold;
+				color: var(--ion-color-danger);
+				font-size: 11px;
+			}
     }
 }

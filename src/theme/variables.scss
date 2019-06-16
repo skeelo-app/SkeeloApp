@@ -180,12 +180,12 @@
     --ion-color-tint: #F2F2F2;
   }
 
-  --ion-color-twitter: #F1F1F1;
-  --ion-color-twitter-rgb: 241,241,241;
-  --ion-color-twitter-contrast: #000000;
-  --ion-color-twitter-contrast-rgb: 0,0,0;
-  --ion-color-twitter-shade: #D4D4D4;
-  --ion-color-twitter-tint: #F2F2F2;
+  --ion-color-graybg: #F1F1F1;
+  --ion-color-graybg-rgb: 241,241,241;
+  --ion-color-graybg-contrast: #000000;
+  --ion-color-graybg-contrast-rgb: 0,0,0;
+  --ion-color-graybg-shade: #D4D4D4;
+  --ion-color-graybg-tint: #F2F2F2;
 
   ion-content {
     --background: #F1F1F1;
@@ -217,5 +217,24 @@
 
   html, body {
     transition: all 1s ease 0s;
+  }
+
+  ion-alert {
+    --min-width: 85% !important;
+    .alert-title {
+      font-size: 19px !important;
+    }
+    .alertOkay {
+      width: 100% !important;
+      background: var(--ion-color-danger) !important;
+      color: var(--ion-color-danger-contrast) !important;
+      font-size: 18px !important;
+      font-weight: bold !important;
+    }
+    .alertCancel {
+      width: 100% !important;
+      font-weight: normal !important;
+      font-size: 15px !important;
+    }
   }
 }

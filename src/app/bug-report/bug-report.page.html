@@ -1,9 +1,120 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>bug-report</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reportar Bug</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div>
+    <ion-grid>
+      <form [formGroup]="bugForm">
 
+        <!-- NOME -->
+        <ion-row>
+          <ion-col>
+            <ion-item [class.invalid]="!bugForm.controls.name.valid && bugForm.controls.name.dirty" [class.valid]="bugForm.controls.name.valid && bugForm.controls.name.dirty">
+              <ion-label position="stacked">
+                <ion-text color="primary">
+                  <h3>Nome</h3>
+                </ion-text>
+              </ion-label>
+              <ion-input required formControlName="name"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="!bugForm.controls.name.valid && bugForm.controls.name.dirty">
+          <ion-col>
+            <ion-item lines="none">
+              <p class="invalidmessage">Preencha esse campo.</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- E-MAIL -->
+        <ion-row>
+          <ion-col>
+            <ion-item [class.invalid]="!bugForm.controls.email.valid && bugForm.controls.email.dirty" [class.valid]="bugForm.controls.email.valid && bugForm.controls.email.dirty">
+              <ion-label position="stacked">
+                <ion-text color="primary">
+                  <h3>E-mail</h3>
+                </ion-text>
+              </ion-label>
+              <ion-input required formControlName="email"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="!bugForm.controls.email.valid && bugForm.controls.email.dirty">
+          <ion-col>
+            <ion-item lines="none">
+              <p class="invalidmessage">Insira um e-mail válido.</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- ASSUNTO -->
+        <ion-row>
+          <ion-col>
+            <ion-item [class.invalid]="!bugForm.controls.subject.valid && bugForm.controls.subject.dirty" [class.valid]="bugForm.controls.subject.valid && bugForm.controls.subject.dirty">
+              <ion-label position="stacked">
+                <ion-text color="primary">
+                  <h3>Assunto</h3>
+                </ion-text>
+              </ion-label>
+              <ion-input required formControlName="subject"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="!bugForm.controls.subject.valid && bugForm.controls.subject.dirty">
+          <ion-col>
+            <ion-item lines="none">
+              <p class="invalidmessage">Preencha esse campo.</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- BUG -->
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none" [class.invalid]="!bugForm.controls.textarea.valid && bugForm.controls.textarea.dirty" [class.valid]="bugForm.controls.textarea.valid && bugForm.controls.textarea.dirty">
+              <ion-label position="stacked">
+                <ion-text color="primary">
+                  <h3>Descreva o erro</h3>
+                </ion-text>
+              </ion-label>
+              <ion-textarea rows="4" required spellcheck="true" wrap="soft" autoGrow="true" formControlName="textarea"></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="!bugForm.controls.textarea.valid && bugForm.controls.textarea.dirty">
+          <ion-col>
+            <ion-item lines="none">
+              <p class="invalidmessage">Preencha esse campo.</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row padding-top>
+          <ion-col>
+            <ion-button color="danger" size="block" type="reset">
+              <ion-ripple-effect></ion-ripple-effect>
+              Limpar
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="primary" size="block" [disabled]="!bugForm.valid" (click)="report()">
+              <ion-ripple-effect></ion-ripple-effect>
+              Reportar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-grid>
+  </div>
 </ion-content>

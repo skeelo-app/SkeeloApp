@@ -70,5 +70,22 @@
         ion-row[padding-top] {
             padding-top: 16px;
         }
+        .invalid {
+            --border-color: var(--ion-color-danger);
+          }
+          .valid {
+              --border-color: var(--ion-color-success);
+          }
+          p.invalidmessage {
+              font-weight: bold;
+              color: var(--ion-color-danger);
+              font-size: 11px;
+          }
+        .buttonInvalid {
+            display: none;
+        }
+        .buttonValid {
+            display: flex;
+        }
     }
 }

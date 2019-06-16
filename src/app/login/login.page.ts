@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +11,29 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
+
+  public loginForm: FormGroup;
+
   constructor(
     private storage: Storage,
-    private router: Router
-  ) { }
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
+    this.loginForm = formBuilder.group({
+      email: ['', Validators.compose(
+        [
+          Validators.required,
+          Validators.pattern('^[a-z0-9]+(\.[_a-z0-9]+)@[a-z0-9-]+(\.[a-z0-9-]+).(\.[a-z]{2,15})$')
+        ]
+      )],
+      password: ['', Validators.compose(
+        [
+          Validators.required,
+          Validators.minLength(6)
+        ]
+      )],
+    });
+  }
 
   ngOnInit() {
     this.slides.lockSwipes(true);
@@ -29,6 +49,7 @@ export class LoginPage implements OnInit {
     this.slides.lockSwipes(false);
     this.slides.slidePrev();
     this.slides.lockSwipes(true);
+    this.loginForm.reset();
   }
 
   login() {
@@ -36,6 +57,7 @@ export class LoginPage implements OnInit {
       console.log(value);
     });
     this.router.navigateByUrl('/tabs');
+    console.log(this.loginForm.value);
   }
 
 }
