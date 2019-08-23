@@ -13,6 +13,7 @@ export class SignUpPage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
 
   public signUpForm: FormGroup;
+  private api: ''
 
   constructor(
     private storage: Storage,
@@ -44,16 +45,27 @@ export class SignUpPage implements OnInit {
           Validators.minLength(6)
         ]
       )],
-      birthdate: ['', Validators.compose(
+      country: ['', Validators.compose(
         [
           Validators.required,
-          Validators.minLength(10)
         ]
       )],
       phone: ['', Validators.compose(
         [
           Validators.required,
           Validators.minLength(15)
+        ]
+      )],
+      birthdate: ['', Validators.compose(
+        [
+          Validators.required,
+          Validators.minLength(10)
+        ]
+      )],
+      zipcode: ['', Validators.compose(
+        [
+          Validators.required,
+          Validators.minLength(10)
         ]
       )]
     });
@@ -81,7 +93,7 @@ export class SignUpPage implements OnInit {
       console.log(value);
     });
     this.router.navigateByUrl('/tabs');
-    console.log(this.signUpForm.value);
+    
   }
 
 

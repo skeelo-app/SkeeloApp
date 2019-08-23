@@ -184,7 +184,31 @@
 						</ion-col>
 					</ion-row>
 
-					<!-- DATA DE NASCIMENTO E TELEFONE-->
+					<!-- COUNTRY E TELEFONE -->
+					<ion-row>
+						<ion-col>
+							<ion-item [class.invalid]="!signUpForm.controls.birthdate.valid && signUpForm.controls.birthdate.dirty" [class.valid]="signUpForm.controls.birthdate.valid && signUpForm.controls.birthdate.dirty">
+								<ion-label position="stacked">
+									<ion-text color="primary">
+										<h3>País</h3>
+									</ion-text>
+								</ion-label>
+								<ion-input required formControlName="country" type="text"></ion-input>
+							</ion-item>
+						</ion-col>
+						<ion-col>
+							<ion-item [class.invalid]="!signUpForm.controls.phone.valid && signUpForm.controls.phone.dirty" [class.valid]="signUpForm.controls.phone.valid && signUpForm.controls.phone.dirty">
+								<ion-label position="stacked">
+									<ion-text color="primary">
+										<h3>Telefone</h3>
+									</ion-text>
+								</ion-label>
+								<ion-input required formControlName="phone" type="phone" [brmasker]="{phone: true}"></ion-input>
+							</ion-item>
+						</ion-col>
+					</ion-row>
+
+					<!-- DATA DE NASCIMENTO E ZIP CODE-->
 					<ion-row>
 						<ion-col>
 							<ion-item [class.invalid]="!signUpForm.controls.birthdate.valid && signUpForm.controls.birthdate.dirty" [class.valid]="signUpForm.controls.birthdate.valid && signUpForm.controls.birthdate.dirty">
@@ -200,10 +224,10 @@
 							<ion-item [class.invalid]="!signUpForm.controls.phone.valid && signUpForm.controls.phone.dirty" [class.valid]="signUpForm.controls.phone.valid && signUpForm.controls.phone.dirty">
 								<ion-label position="stacked">
 									<ion-text color="primary">
-										<h3>Telefone</h3>
+										<h3>CEP</h3>
 									</ion-text>
 								</ion-label>
-								<ion-input required formControlName="phone" type="phone" [brmasker]="{phone: true}"></ion-input>
+								<ion-input required formControlName="zipcode" type="text" [brmasker]="{mask: '00.000-000'}"></ion-input>
 							</ion-item>
 						</ion-col>
 					</ion-row>

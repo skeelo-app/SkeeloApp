@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SkeeloApiService } from '../services/skeelo-api.service';
 
 @Component({
   selector: 'app-intro',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntroPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public skeeloAPI: SkeeloApiService
+  ) { }
 
   ngOnInit() {
+    console.log(this.skeeloAPI.getUserByID().subscribe(result => {
+      console.log(result);
+    }));
   }
 
 }
