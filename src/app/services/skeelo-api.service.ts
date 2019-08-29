@@ -5,13 +5,21 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SkeeloApiService {
-  private apiUrl = 'http://localhost:3003/';
+  private apiUrl = 'http://bicudo.sytes.net:3003/';
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getUserByID() {
-    return this.http.get(this.apiUrl + 'users/10');
+  getUserByID(id) {
+    return this.http.get(this.apiUrl + 'users/' + id);
   }
+
+  createUser(body) {
+    let headers: {
+      'Content-Type': 'application/json'
+    };
+    return this.http.post(this.apiUrl + 'users/create', body, {headers});
+  }
+
 }

@@ -121,27 +121,6 @@
 						</ion-col>
 					</ion-row>
 
-					<!-- CPF -->
-					<ion-row>
-						<ion-col>
-							<ion-item [class.invalid]="!signUpForm.controls.cpf.valid && signUpForm.controls.cpf.dirty" [class.valid]="signUpForm.controls.cpf.valid && signUpForm.controls.cpf.dirty">
-								<ion-label position="stacked">
-									<ion-text color="primary">
-										<h3>CPF (Opcional)</h3>
-									</ion-text>
-								</ion-label>
-								<ion-input formControlName="cpf" type="text" [brmasker]="{mask: '000.000.000-00', type:'num'}"></ion-input>
-							</ion-item>
-						</ion-col>
-					</ion-row>
-					<ion-row *ngIf="!signUpForm.controls.cpf.valid && signUpForm.controls.cpf.dirty">
-						<ion-col>
-							<ion-item lines="none">
-								<p class="invalidmessage">Por favor, insira um CPF válido.</p>
-							</ion-item>
-						</ion-col>
-					</ion-row>
-					
 					<!-- E-MAIL -->
 					<ion-row>
 						<ion-col>
@@ -184,16 +163,15 @@
 						</ion-col>
 					</ion-row>
 
-					<!-- COUNTRY E TELEFONE -->
+					<!-- CPF E TELEFONE-->
 					<ion-row>
 						<ion-col>
-							<ion-item [class.invalid]="!signUpForm.controls.birthdate.valid && signUpForm.controls.birthdate.dirty" [class.valid]="signUpForm.controls.birthdate.valid && signUpForm.controls.birthdate.dirty">
-								<ion-label position="stacked">
+							<ion-item [class.invalid]="!signUpForm.controls.cpf.valid && signUpForm.controls.cpf.dirty" [class.valid]="signUpForm.controls.cpf.valid && signUpForm.controls.cpf.dirty">								<ion-label position="stacked">
 									<ion-text color="primary">
-										<h3>País</h3>
+										<h3>CPF</h3>
 									</ion-text>
 								</ion-label>
-								<ion-input required formControlName="country" type="text"></ion-input>
+								<ion-input formControlName="cpf" type="text" [brmasker]="{mask: '000.000.000-00', type:'num'}"></ion-input>
 							</ion-item>
 						</ion-col>
 						<ion-col>
@@ -207,8 +185,25 @@
 							</ion-item>
 						</ion-col>
 					</ion-row>
+					<ion-row *ngIf="(!signUpForm.controls.cpf.valid && signUpForm.controls.cpf.dirty) || (!signUpForm.controls.phone.valid && signUpForm.controls.phone.dirty)">
+						<ion-col *ngIf="!signUpForm.controls.cpf.valid && signUpForm.controls.cpf.dirty">
+							<ion-item lines="none">
+								<p class="invalidmessage">Por favor, insira um CPF válido.</p>
+							</ion-item>
+						</ion-col>
+						<ion-col *ngIf="!signUpForm.controls.phone.valid && signUpForm.controls.cpf.valid && signUpForm.controls.phone.dirty" push="6.5" size="5.5">
+							<ion-item lines="none">
+								<p class="invalidmessage">Por favor, insira um telefone válido.</p>
+							</ion-item>
+						</ion-col>
+						<ion-col *ngIf="!signUpForm.controls.phone.valid && !signUpForm.controls.cpf.valid && signUpForm.controls.phone.dirty">
+							<ion-item lines="none">
+								<p class="invalidmessage">Por favor, insira um telefone válido.</p>
+							</ion-item>
+						</ion-col>
+					</ion-row>
 
-					<!-- DATA DE NASCIMENTO E ZIP CODE-->
+					<!-- DATA DE NASCIMENTO -->
 					<ion-row>
 						<ion-col>
 							<ion-item [class.invalid]="!signUpForm.controls.birthdate.valid && signUpForm.controls.birthdate.dirty" [class.valid]="signUpForm.controls.birthdate.valid && signUpForm.controls.birthdate.dirty">
@@ -220,35 +215,36 @@
 								<ion-input required formControlName="birthdate" type="date" [brmasker]="{mask: '0000-00-00'}"></ion-input>
 							</ion-item>
 						</ion-col>
+					</ion-row>
+					<ion-row *ngIf="!signUpForm.controls.birthdate.valid && signUpForm.controls.birthdate.dirty">
 						<ion-col>
-							<ion-item [class.invalid]="!signUpForm.controls.phone.valid && signUpForm.controls.phone.dirty" [class.valid]="signUpForm.controls.phone.valid && signUpForm.controls.phone.dirty">
+							<ion-item lines="none">
+								<p class="invalidmessage">Por favor, insira uma data de nascimento válida.</p>
+							</ion-item>
+						</ion-col>
+					</ion-row>
+
+					<!-- DATA DE NASCIMENTO -->
+					<ion-row>
+						<ion-col>
+							<ion-item [class.invalid]="!signUpForm.controls.zip.valid && signUpForm.controls.zip.dirty" [class.valid]="signUpForm.controls.zip.valid && signUpForm.controls.zip.dirty">
 								<ion-label position="stacked">
 									<ion-text color="primary">
 										<h3>CEP</h3>
 									</ion-text>
 								</ion-label>
-								<ion-input required formControlName="zipcode" type="text" [brmasker]="{mask: '00.000-000'}"></ion-input>
+								<ion-input required formControlName="zip" type="text" [brmasker]="{mask: '00.000-000'}"></ion-input>
 							</ion-item>
 						</ion-col>
 					</ion-row>
-					<ion-row *ngIf="(!signUpForm.controls.birthdate.valid && signUpForm.controls.birthdate.dirty) || (!signUpForm.controls.phone.valid && signUpForm.controls.phone.dirty)">
-						<ion-col *ngIf="!signUpForm.controls.birthdate.valid && signUpForm.controls.birthdate.dirty">
+					<ion-row *ngIf="!signUpForm.controls.zip.valid && signUpForm.controls.zip.dirty">
+						<ion-col>
 							<ion-item lines="none">
-								<p class="invalidmessage">Por favor, insira uma data de nascimento válida.</p>
-							</ion-item>
-						</ion-col>
-						<ion-col *ngIf="!signUpForm.controls.phone.valid && signUpForm.controls.birthdate.valid && signUpForm.controls.phone.dirty" push="6.5" size="5.5">
-							<ion-item lines="none">
-								<p class="invalidmessage">Por favor, insira um telefone válido.</p>
-							</ion-item>
-						</ion-col>
-						<ion-col *ngIf="!signUpForm.controls.phone.valid && !signUpForm.controls.birthdate.valid && signUpForm.controls.phone.dirty" push="0.5">
-							<ion-item lines="none">
-								<p class="invalidmessage">Por favor, insira um telefone válido.</p>
+								<p class="invalidmessage">Por favor, insira um CEP válido.</p>
 							</ion-item>
 						</ion-col>
 					</ion-row>
-					
+
 					<ion-row padding-top>
 						<ion-col>
 							<ion-button size="block" color="primary" [disabled]="!signUpForm.valid" (click)="submit()">

@@ -3,6 +3,7 @@ import { IonSlides } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SkeeloApiService } from '../services/skeelo-api.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginPage implements OnInit {
   constructor(
     private storage: Storage,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private skeeloAPI: SkeeloApiService
   ) {
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose(
@@ -53,11 +55,12 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    this.storage.set('showIntro', false).then((value) => {
-      console.log(value);
-    });
-    this.router.navigateByUrl('/tabs');
     console.log(this.loginForm.value);
+    let data = {
+      email: this.loginForm.value['email'],
+      password: this.loginForm.value['password']
+    };
+    // this.skeeloAPI.login(data)
   }
 
 }
