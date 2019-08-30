@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SkeeloApiService } from '../services/skeelo-api.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private skeeloAPI: SkeeloApiService,
+    private storage: Storage,
+  ) { }
 
-  user = {
-    name: 'Beto'
-  };
+  public user = {
+    user_name: '',
+		user_email: '',
+		user_password: '',
+		user_birthdate: '',
+		user_country: '',
+		user_phone: '',
+		user_cpf: '',
+		user_zip: ''
+  }
+
+  getID() {
+    this.storage.get('id').then((value) => {
+      this.getUserInfo(value);
+    });
+  }
+
+  getUserInfo(id) {
+    this.skeeloAPI.getUserByID(id).subscribe(([result]: any) => {
+      this.user = result;
+    })
+  }
 
   promotions = [
     {
@@ -37,6 +61,7 @@ export class HomePage implements OnInit {
   };
 
   ngOnInit() {
+    this.getID();
   }
 
 }

@@ -13,14 +13,6 @@ export class IntroPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    let id = 10;
-    console.log(this.skeeloAPI.getUserByID(id)
-      .subscribe(
-        ([result]: any) => {
-          console.log(result.user_email);
-        } 
-      )
-    );
   }
 
 }

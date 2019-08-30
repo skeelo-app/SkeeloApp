@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SkeeloApiService } from '../services/skeelo-api.service';
 import * as CryptoJS from 'crypto-js';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,12 +16,14 @@ export class SignUpPage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
 
   public signUpForm: FormGroup;
+  private id;
 
   constructor(
     private storage: Storage,
     private router: Router,
     private formBuilder: FormBuilder,
-    private skeeloAPI: SkeeloApiService
+    private skeeloAPI: SkeeloApiService,
+    public alertController: AlertController
   ) {
     this.signUpForm = formBuilder.group({
       name: ['', Validators.compose(
@@ -85,56 +88,148 @@ export class SignUpPage implements OnInit {
     this.signUpForm.reset();
   }
 
+  async alertSuccess() {
+    const alert = await this.alertController.create({
+      message: 'Usuário criado com sucesso!',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.router.navigateByUrl('/tabs');
+            this.storage.set('showIntro', false);
+            this.storage.set('id', this.id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async alertError() {
+    const alert = await this.alertController.create({
+      message: 'Não foi possível criar seu usuário! Confira seus dados e tente novamente',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async emailUnique() {
+    const alert = await this.alertController.create({
+      message: 'Esse e-mail já existe em nosso sistema. Deseja fazer login?',
+      buttons: [
+        {
+          text: 'Tentar novamente'
+        },
+        {
+          text: 'Login',
+          handler: () => {
+            this.router.navigateByUrl('/login');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async cpfUnique() {
+    const alert = await this.alertController.create({
+      message: 'Esse CPF já existe em nosso sistema. Deseja fazer login?',
+      buttons: [
+        {
+          text: 'Tentar novamente'
+        },
+        {
+          text: 'Login',
+          handler: () => {
+            this.router.navigateByUrl('/login');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async phoneUnique() {
+    const alert = await this.alertController.create({
+      message: 'Esse número de telefone já existe em nosso sistema. Deseja fazer login?',
+      buttons: [
+        {
+          text: 'Tentar novamente'
+        },
+        {
+          text: 'Login',
+          handler: () => {
+            this.router.navigateByUrl('/login');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   submit() {
-    let body;
+    this.skeeloAPI.getUserByEmail(this.signUpForm.value['email']).subscribe(([result]: any) => {
+      if (result == undefined) {
+        let body;
 
-    // FORMATAÇÃO DO TELEFONE
-    let phone = this.signUpForm.value["phone"].replace('(', '').replace(')', '').replace('-', '');
-    this.signUpForm.value["phone"] = phone.replace(/\s+/g, '');
+        // FORMATAÇÃO DO TELEFONE
+        let phone = this.signUpForm.value["phone"].replace('(', '').replace(')', '').replace('-', '');
+        this.signUpForm.value["phone"] = phone.replace(/\s+/g, '');
 
-    // FORMATAÇÃO DO ZIP
-    let zip = this.signUpForm.value["zip"].replace(/\./g, '').replace('-', '');
-    this.signUpForm.value["zip"] = zip;
+        // FORMATAÇÃO DO ZIP
+        let zip = this.signUpForm.value["zip"].replace(/\./g, '').replace('-', '');
+        this.signUpForm.value["zip"] = zip;
 
-    // CRIPTOGRAFIA DA SENHA
-    let password = this.signUpForm.value["password"];
-    let pepper = this.signUpForm.value["email"] + '1d0ntkn0w!';
-    let crypto = CryptoJS.AES.encrypt(password, pepper, {
-      keySize: 128/8
-    });
-    this.signUpForm.value["password"] = crypto.toString();
+        // CRIPTOGRAFIA DA SENHA
+        let password = this.signUpForm.value["password"];
+        let pepper = this.signUpForm.value["email"] + '28052018';
+        let crypto = CryptoJS.AES.encrypt(password, pepper, {
+          keySize: 128/8
+        });
+        this.signUpForm.value["password"] = crypto.toString();
 
-    if (this.signUpForm.value["cpf"] == '') {
-      body = {
-        'user_name': this.signUpForm.value["name"],
-        'user_email': this.signUpForm.value["email"],
-        'user_password': this.signUpForm.value["password"],
-        'user_birthdate': this.signUpForm.value["birthdate"],
-        'user_phone': this.signUpForm.value["phone"],
-        'user_zip': this.signUpForm.value["zip"]
-      };
-    } else {
-      let cpf = this.signUpForm.value["cpf"].replace(/\./g, '');
-      this.signUpForm.value["cpf"] = cpf.replace('-', '');
-      body = {
-        'user_name': this.signUpForm.value["name"],
-        'user_email': this.signUpForm.value["email"],
-        'user_password': this.signUpForm.value["password"],
-        'user_birthdate': this.signUpForm.value["birthdate"],
-        'user_cpf': this.signUpForm.value["cpf"],
-        'user_phone': this.signUpForm.value["phone"],
-        'user_zip': this.signUpForm.value["zip"]
-      };
-    };
-    this.skeeloAPI.createUser(body).subscribe(result => {
-      console.log(result);
-      if (result == 201) {
-        console.log("Usuário criado com sucesso!");
-        this.router.navigateByUrl('/tabs');
-        this.storage.set('showIntro', false);
+        if (this.signUpForm.value["cpf"] == '') {
+          body = {
+            'user_name': this.signUpForm.value["name"],
+            'user_email': this.signUpForm.value["email"],
+            'user_password': this.signUpForm.value["password"],
+            'user_birthdate': this.signUpForm.value["birthdate"],
+            'user_phone': this.signUpForm.value["phone"],
+            'user_zip': this.signUpForm.value["zip"]
+          };
+        } else {
+          let cpf = this.signUpForm.value["cpf"].replace(/\./g, '');
+          this.signUpForm.value["cpf"] = cpf.replace('-', '');
+          body = {
+            'user_name': this.signUpForm.value["name"],
+            'user_email': this.signUpForm.value["email"],
+            'user_password': this.signUpForm.value["password"],
+            'user_birthdate': this.signUpForm.value["birthdate"],
+            'user_cpf': this.signUpForm.value["cpf"],
+            'user_phone': this.signUpForm.value["phone"],
+            'user_zip': this.signUpForm.value["zip"]
+          };
+        };
+        this.skeeloAPI.createUser(body).subscribe(result => {
+          if (result == 201) {
+            this.skeeloAPI.getUserByEmail(this.signUpForm.value['email']).subscribe(([result]: any) => {
+              this.id = result.user_id;
+            })
+            this.alertSuccess();
+          }
+        }, error => {
+          this.alertError();
+        }
+        );
+      } else {
+        this.emailUnique();
       }
-    });
-    console.log(body);
+    })
   }
 
 

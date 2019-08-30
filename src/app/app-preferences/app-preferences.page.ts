@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-app-preferences',
@@ -11,7 +12,8 @@ export class AppPreferencesPage implements OnInit {
 
   constructor(
     private storage: Storage,
-    private router: Router
+    private router: Router,
+    public alertController: AlertController
   ) { }
 
   menu = [
@@ -27,14 +29,33 @@ export class AppPreferencesPage implements OnInit {
     }
   ];
 
+  async confirmLogout() {
+    const alert = await this.alertController.create({
+      message: 'Deseja realmente sair?',
+      buttons: [
+        {
+          text: 'Não'
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.storage.set('showIntro', true).then((value) => {
+              console.log(value);
+            });
+            this.router.navigateByUrl('/intro');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   ngOnInit() {
   }
 
   logout() {
-    this.storage.set('showIntro', true).then((value) => {
-      console.log(value);
-    });
-    this.router.navigateByUrl('/intro');
+    this.confirmLogout();
   }
 
 }

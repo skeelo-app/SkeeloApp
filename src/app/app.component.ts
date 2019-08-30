@@ -28,7 +28,6 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.storage.set('showIntro', true);
       this.storage.get('showIntro').then((value) => {
         if (value) {
           this.rootPage = '/intro';

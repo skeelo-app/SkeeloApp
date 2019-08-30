@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SkeeloApiService {
-  private apiUrl = 'http://bicudo.sytes.net:3003/';
+  private apiUrl = 'http://localhost:3003/';
 
   constructor(
     private http: HttpClient
@@ -20,6 +20,10 @@ export class SkeeloApiService {
       'Content-Type': 'application/json'
     };
     return this.http.post(this.apiUrl + 'users/create', body, {headers});
+  }
+
+  getUserByEmail(email) {
+    return this.http.get(this.apiUrl + 'users/login/' + email);
   }
 
 }

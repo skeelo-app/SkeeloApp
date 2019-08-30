@@ -4,6 +4,8 @@ import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SkeeloApiService } from '../services/skeelo-api.service';
+import * as CryptoJS from 'crypto-js';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,8 @@ export class LoginPage implements OnInit {
     private storage: Storage,
     private router: Router,
     private formBuilder: FormBuilder,
-    private skeeloAPI: SkeeloApiService
+    private skeeloAPI: SkeeloApiService,
+    public alertController: AlertController
   ) {
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose(
@@ -54,13 +57,55 @@ export class LoginPage implements OnInit {
     this.loginForm.reset();
   }
 
+  async alertSuccess() {
+    const alert = await this.alertController.create({
+      message: 'Usuário logado com sucesso!',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.router.navigateByUrl('/tabs');
+          this.storage.set('showIntro', false);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async wrongPassword() {
+    const alert = await this.alertController.create({
+      message: 'Senha incorreta!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  private decrypted;
+
+  decrypt(cryptopass) {
+    let pepper = this.loginForm.value["email"] + '28052018';
+    let password = CryptoJS.AES.decrypt(cryptopass, pepper, {
+      keySize: 128/8
+    });
+    this.decrypted = password.toString(CryptoJS.enc.Utf8);
+  }
+
   login() {
-    console.log(this.loginForm.value);
-    let data = {
-      email: this.loginForm.value['email'],
-      password: this.loginForm.value['password']
-    };
-    // this.skeeloAPI.login(data)
+    this.skeeloAPI.getUserByEmail(this.loginForm.value['email'])
+    .subscribe(
+      ([result]: any) => {
+        let crypto = result.user_password;
+        this.decrypt(crypto);
+      }
+    );
+    if(this.decrypted == this.loginForm.value['password']) {
+      this.alertSuccess();
+    } else {
+      this.wrongPassword();
+    }
   }
 
 }
