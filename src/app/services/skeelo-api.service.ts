@@ -11,8 +11,10 @@ export class SkeeloApiService {
     private http: HttpClient
   ) { }
 
+  // USUARIOS
+
   getUserByID(id) {
-    return this.http.get(this.apiUrl + 'users/' + id);
+    return this.http.get(this.apiUrl + 'users/id/' + id);
   }
 
   createUser(body) {
@@ -23,7 +25,34 @@ export class SkeeloApiService {
   }
 
   getUserByEmail(email) {
-    return this.http.get(this.apiUrl + 'users/login/' + email);
+    return this.http.get(this.apiUrl + 'users/email/' + email);
+  }
+
+  getUserByCpf(cpf) {
+    return this.http.get(this.apiUrl + 'users/cpf/' + cpf);
+  }
+
+  getUserByPhone(phone) {
+    return this.http.get(this.apiUrl + 'users/phone/' + phone);
+  }
+
+  // PEDIDOS
+  getOrdersByOwner(owner) {
+    return this.http.get(this.apiUrl + 'orders/owner/' + owner);
+  }
+
+  getOrdersByID(id) {
+    return this.http.get(this.apiUrl + 'orders/id/' + id);
+  }
+
+  // LOJAS
+  getStoreByID(id) {
+    return this.http.get(this.apiUrl + 'stores/id/' + id);
+  }
+
+  // ITEMS
+  getItemByID(id) {
+    return this.http.get(this.apiUrl + 'items/id/' + id);
   }
 
 }

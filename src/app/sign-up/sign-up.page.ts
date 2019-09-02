@@ -17,6 +17,9 @@ export class SignUpPage implements OnInit {
 
   public signUpForm: FormGroup;
   private id;
+  private equalCpf;
+  private equalEmail;
+  private equalPhone;
 
   constructor(
     private storage: Storage,
@@ -172,65 +175,107 @@ export class SignUpPage implements OnInit {
     await alert.present();
   }
 
-  submit() {
-    this.skeeloAPI.getUserByEmail(this.signUpForm.value['email']).subscribe(([result]: any) => {
+  check() {
+    
+    // FORMATAÇÃO DO CPF
+    let cpf = this.signUpForm.value["cpf"].replace(/\./g, '');
+    this.signUpForm.value["cpf"] = cpf.replace('-', '');
+
+    // VERIFICAÇÃO DO CPF
+    this.skeeloAPI.getUserByCpf(this.signUpForm.value['cpf'])
+    .subscribe(([result]: any) => {
       if (result == undefined) {
-        let body;
+        this.equalCpf = false;
+      } else {
+        this.cpfUnique();
+      }
+    });
 
-        // FORMATAÇÃO DO TELEFONE
-        let phone = this.signUpForm.value["phone"].replace('(', '').replace(')', '').replace('-', '');
-        this.signUpForm.value["phone"] = phone.replace(/\s+/g, '');
+    // FORMATAÇÃO DO TELEFONE
+    let phone = this.signUpForm.value["phone"].replace('(', '').replace(')', '').replace('-', '');
+    this.signUpForm.value["phone"] = phone.replace(/\s+/g, '');
 
-        // FORMATAÇÃO DO ZIP
-        let zip = this.signUpForm.value["zip"].replace(/\./g, '').replace('-', '');
-        this.signUpForm.value["zip"] = zip;
+    // VERIFICAÇÃO DO TELEFONE
+    this.skeeloAPI.getUserByPhone(this.signUpForm.value['phone'])
+    .subscribe(([result]: any) => {
+      if (result == undefined) {
+        this.equalPhone = false;
+      } else {
+        this.phoneUnique();
+      }
+    });
 
-        // CRIPTOGRAFIA DA SENHA
-        let password = this.signUpForm.value["password"];
-        let pepper = this.signUpForm.value["email"] + '28052018';
-        let crypto = CryptoJS.AES.encrypt(password, pepper, {
-          keySize: 128/8
-        });
-        this.signUpForm.value["password"] = crypto.toString();
-
-        if (this.signUpForm.value["cpf"] == '') {
-          body = {
-            'user_name': this.signUpForm.value["name"],
-            'user_email': this.signUpForm.value["email"],
-            'user_password': this.signUpForm.value["password"],
-            'user_birthdate': this.signUpForm.value["birthdate"],
-            'user_phone': this.signUpForm.value["phone"],
-            'user_zip': this.signUpForm.value["zip"]
-          };
-        } else {
-          let cpf = this.signUpForm.value["cpf"].replace(/\./g, '');
-          this.signUpForm.value["cpf"] = cpf.replace('-', '');
-          body = {
-            'user_name': this.signUpForm.value["name"],
-            'user_email': this.signUpForm.value["email"],
-            'user_password': this.signUpForm.value["password"],
-            'user_birthdate': this.signUpForm.value["birthdate"],
-            'user_cpf': this.signUpForm.value["cpf"],
-            'user_phone': this.signUpForm.value["phone"],
-            'user_zip': this.signUpForm.value["zip"]
-          };
-        };
-        this.skeeloAPI.createUser(body).subscribe(result => {
-          if (result == 201) {
-            this.skeeloAPI.getUserByEmail(this.signUpForm.value['email']).subscribe(([result]: any) => {
-              this.id = result.user_id;
-            })
-            this.alertSuccess();
-          }
-        }, error => {
-          this.alertError();
-        }
-        );
+    // VERIFICAÇÃO DO EMAIL
+    this.skeeloAPI.getUserByEmail(this.signUpForm.value['email'])
+    .subscribe(([result]: any) => {
+      if (result == undefined) {
+        this.equalEmail = false;
       } else {
         this.emailUnique();
       }
-    })
+    });
+    if (this.equalCpf == false && this.equalPhone == false && this.equalEmail == false) {
+      this.submit();
+    }
   }
+
+  submit() {
+    let body;
+
+    // FORMATAÇÃO DO TELEFONE
+    let phone = this.signUpForm.value["phone"].replace('(', '').replace(')', '').replace('-', '');
+    this.signUpForm.value["phone"] = phone.replace(/\s+/g, '');
+
+    // FORMATAÇÃO DO ZIP
+    let zip = this.signUpForm.value["zip"].replace(/\./g, '').replace('-', '');
+    this.signUpForm.value["zip"] = zip;
+
+    // CRIPTOGRAFIA DA SENHA
+    let password = this.signUpForm.value["password"];
+    let pepper = this.signUpForm.value["email"] + '28052018';
+    let crypto = CryptoJS.AES.encrypt(password, pepper, {
+      keySize: 128/8
+    });
+    this.signUpForm.value["password"] = crypto.toString();
+
+    // VERIFICA SE EXISTE VALOR DE CPF E ADICIONA NO ARRAY
+    if (this.signUpForm.value["cpf"] == '') {
+      body = {
+        'user_name': this.signUpForm.value["name"],
+        'user_email': this.signUpForm.value["email"],
+        'user_password': this.signUpForm.value["password"],
+        'user_birthdate': this.signUpForm.value["birthdate"],
+        'user_phone': this.signUpForm.value["phone"],
+        'user_zip': this.signUpForm.value["zip"]
+      };
+    } else {
+      let cpf = this.signUpForm.value["cpf"].replace(/\./g, '');
+      this.signUpForm.value["cpf"] = cpf.replace('-', '');
+      body = {
+        'user_name': this.signUpForm.value["name"],
+        'user_email': this.signUpForm.value["email"],
+        'user_password': this.signUpForm.value["password"],
+        'user_birthdate': this.signUpForm.value["birthdate"],
+        'user_cpf': this.signUpForm.value["cpf"],
+        'user_phone': this.signUpForm.value["phone"],
+        'user_zip': this.signUpForm.value["zip"]
+      };
+    };
+
+    // ENVIA OS DADOS PARA A API
+    this.skeeloAPI.createUser(body)
+      .subscribe(result => {
+        if(result == 201) {
+          this.skeeloAPI.getUserByEmail(this.signUpForm.value['email'])
+            .subscribe(([result]: any) => {
+              this.id = result.user_id;
+            })
+          this.alertSuccess();
+        } else {
+          this.alertError();
+        }
+    });
+  };
 
 
 }

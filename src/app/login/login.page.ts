@@ -83,6 +83,15 @@ export class LoginPage implements OnInit {
     await alert.present();
   }
 
+  async emailError() {
+    const alert = await this.alertController.create({
+      message: 'Este endereço de e-mail não está cadastrado!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
   private decrypted;
 
   decrypt(cryptopass) {
@@ -97,15 +106,19 @@ export class LoginPage implements OnInit {
     this.skeeloAPI.getUserByEmail(this.loginForm.value['email'])
     .subscribe(
       ([result]: any) => {
-        let crypto = result.user_password;
-        this.decrypt(crypto);
+        if (result == undefined) {
+          this.emailError();
+        } else {
+          let crypto = result.user_password;
+          this.decrypt(crypto);
+          if(this.decrypted == this.loginForm.value['password']) {
+            this.alertSuccess();
+          } else {
+            this.wrongPassword();
+          }
+        }
       }
     );
-    if(this.decrypted == this.loginForm.value['password']) {
-      this.alertSuccess();
-    } else {
-      this.wrongPassword();
-    }
   }
 
 }

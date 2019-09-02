@@ -34,6 +34,8 @@ export class HomePage implements OnInit {
   getUserInfo(id) {
     this.skeeloAPI.getUserByID(id).subscribe(([result]: any) => {
       this.user = result;
+      let name = result.user_name
+      this.user.user_name = name.split(' ')[0];
     })
   }
 
@@ -61,6 +63,9 @@ export class HomePage implements OnInit {
   };
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
     this.getID();
   }
 

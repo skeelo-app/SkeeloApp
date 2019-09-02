@@ -9,27 +9,27 @@
 
 <ion-content>
   <ion-list lines="full">
-    <ion-item *ngFor="let order of orders" detail="false" routerLink="/order-details/{{order.id}}">
+    <ion-item *ngFor="let order of orders" detail="false" [routerLink]="['/order-details', order.order_id]">
       <ion-icon color="primary" src="../../assets/icons/utensils-solid.svg" slot="start"></ion-icon>
       <ion-grid>
         <ion-row>
           <ion-col>
             <ion-label text-wrap>
               <ion-text color="primary">
-                <h3>{{order.store}}</h3>
+                <h3>{{order.store_name}}</h3>
               </ion-text>
               <ion-text>
-                <p>{{order.items}} itens</p>
+                <p>{{order.order_items}} itens</p>
               </ion-text>
             </ion-label>
           </ion-col>
           <ion-col class="text-end">
             <ion-label text-wrap>
               <ion-text color="primary">
-                <h3>{{order.price}}</h3>
+                <h3>{{order.order_price}}</h3>
               </ion-text>
               <ion-text color="primary">
-                <p>{{order.date}}</p>
+                <p>{{order.order_date}}</p>
               </ion-text>
             </ion-label>
           </ion-col>
