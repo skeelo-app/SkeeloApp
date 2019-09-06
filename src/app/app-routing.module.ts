@@ -16,8 +16,10 @@ const routes: Routes = [
   { path: 'edit-payment-method/:id', loadChildren: './edit-payment-method/edit-payment-method.module#EditPaymentMethodPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'sign-up', loadChildren: './sign-up/sign-up.module#SignUpPageModule' },
-  { path: 'intro', loadChildren: './intro/intro.module#IntroPageModule' },  { path: 'be-partner', loadChildren: './be-partner/be-partner.module#BePartnerPageModule' },
-  { path: 'bug-report', loadChildren: './bug-report/bug-report.module#BugReportPageModule' }
+  { path: 'intro', loadChildren: './intro/intro.module#IntroPageModule' },
+  { path: 'be-partner', loadChildren: './be-partner/be-partner.module#BePartnerPageModule' },
+  { path: 'bug-report', loadChildren: './bug-report/bug-report.module#BugReportPageModule' },
+  { path: 'profile/:id', loadChildren: './profile/profile.module#ProfilePageModule' }
 
 
 ];

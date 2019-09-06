@@ -29,7 +29,8 @@
           </ion-row>
           <ion-row>
             <ion-text>
-              <p>{{order.order_items}} itens</p>
+              <p *ngIf="order.order_items == 1">{{order.order_items}} item</p>
+              <p *ngIf="order.order_items > 1">{{order.order_items}} itens</p>
             </ion-text>
           </ion-row>
           <ion-row>

@@ -20,13 +20,15 @@ export class OrdersPage implements OnInit {
       order_id: '',
       order_owner: '',
       order_store: '',
+      store_name: '',
       order_date: '',
       order_orderitems: '',
       order_price: '',
-      order_items: '',
-      store_name: ''
+      order_items: ''
     }
   ]
+
+  public showOrders = false;
 
   ngOnInit() {
   }
@@ -65,12 +67,17 @@ export class OrdersPage implements OnInit {
   }
 
   getOrders(id) {
-    this.skeeloAPI.getOrdersByOwner(id)
+    this.skeeloAPI.getOrdersByUser(id)
       .subscribe(result => {
         this.orders = result;
         this.getStores();
         this.formatDates();
         this.formatCurrency();
+        if (result[0].order_id == "") {
+          this.showOrders = false;
+        } else {
+          this.showOrders = true;
+        }
       });
   }
 

@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list lines="full">
+  <ion-list lines="full" *ngIf="showOrders == true">
     <ion-item *ngFor="let order of orders" detail="false" [routerLink]="['/order-details', order.order_id]">
       <ion-icon color="primary" src="../../assets/icons/utensils-solid.svg" slot="start"></ion-icon>
       <ion-grid>
@@ -19,7 +19,8 @@
                 <h3>{{order.store_name}}</h3>
               </ion-text>
               <ion-text>
-                <p>{{order.order_items}} itens</p>
+                <p *ngIf="order.order_items == 1">{{order.order_items}} item</p>
+                <p *ngIf="order.order_items > 1">{{order.order_items}} itens</p>
               </ion-text>
             </ion-label>
           </ion-col>
@@ -37,4 +38,27 @@
       </ion-grid>
     </ion-item>
   </ion-list>
+  <div *ngIf="showOrders == false">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <h1>Oops...</h1>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <p translucent>Parece que você ainda não realizou um pedido.</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-icon no-button src="../../assets/icons/frown-regular.svg"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

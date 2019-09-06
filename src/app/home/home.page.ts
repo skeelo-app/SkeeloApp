@@ -15,6 +15,7 @@ export class HomePage implements OnInit {
   ) { }
 
   public user = {
+    user_id: '',
     user_name: '',
 		user_email: '',
 		user_password: '',
@@ -25,16 +26,20 @@ export class HomePage implements OnInit {
 		user_zip: ''
   }
 
+  public showLastOrder = false;
+
   getID() {
     this.storage.get('id').then((value) => {
       this.getUserInfo(value);
+      this.getLastOrder(value);
+      this.user.user_id = value;
     });
   }
 
   getUserInfo(id) {
     this.skeeloAPI.getUserByID(id).subscribe(([result]: any) => {
       this.user = result;
-      let name = result.user_name
+      let name = result.user_name;
       this.user.user_name = name.split(' ')[0];
     })
   }
@@ -50,13 +55,51 @@ export class HomePage implements OnInit {
     }
   ];
 
-  lastOrder = {
-    id: '1',
-    store: 'Mercado A',
-    date: 'Dia 1 de janeiro',
-    items: '50',
-    price: 'R$10,00',
+  public lastOrder = {
+    order_id: '',
+    order_storeId: '',
+    order_storeName: '',
+    order_date: '',
+    order_items: '',
+    order_price: ''
   }
+
+  getLastOrder(value) {
+    this.skeeloAPI.getOrdersByUser(value).subscribe((result: any) => {
+      this.lastOrder.order_id = result[0].order_id;
+      this.lastOrder.order_storeId = result[0].order_store;
+      this.lastOrder.order_date = result[0].order_date;
+      this.lastOrder.order_items = result[0].order_items;
+      this.lastOrder.order_price = result[0].order_price;
+      this.getStore(result[0].order_store);
+      this.formatCurrency();
+      this.formatDates();
+      if (result[0].order_id == "") {
+        this.showLastOrder = false;
+      } else {
+        this.showLastOrder = true;
+      }
+    })
+  }
+
+  formatDates() {
+    let data = new Date(this.lastOrder.order_date);
+    let formatedDate = data.toLocaleDateString();
+    this.lastOrder.order_date = formatedDate;
+  }
+
+  formatCurrency() {
+    let value = parseFloat(this.lastOrder.order_price);
+    let formatedPrice = (value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    this.lastOrder.order_price = formatedPrice;
+  }
+
+  getStore(id) {
+    this.skeeloAPI.getStoreByID(id).subscribe(([result]: any) => {
+      this.lastOrder.order_storeName = result.store_name;
+    });
+  }
+
 
   slideOpts = {
     loop: true
@@ -67,6 +110,9 @@ export class HomePage implements OnInit {
 
   ngAfterViewInit() {
     this.getID();
+    if(this.lastOrder.order_id) {
+      this.showLastOrder = true;
+    }
   }
 
 }

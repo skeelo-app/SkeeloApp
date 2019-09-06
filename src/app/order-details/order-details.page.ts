@@ -51,7 +51,7 @@ export class OrderDetailsPage implements OnInit {
 
   formatCurrency() {
     let value = parseFloat(this.order.order_price);
-    let formatedPrice = (value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    let formatedPrice = (value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', localeMatcher: 'lookup'});
     this.order.order_price = formatedPrice;
   }
 
@@ -62,7 +62,7 @@ export class OrderDetailsPage implements OnInit {
         let unitPrice = parseFloat(result.item_price);
         this.order.order_orderitems[i].orderitems_itemname = result.item_name;
         let finalPrice = parseFloat(this.order.order_orderitems[i].orderitems_quantity) * unitPrice;
-        this.order.order_orderitems[i].orderitems_finalprice = (finalPrice).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        this.order.order_orderitems[i].orderitems_finalprice = (finalPrice).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', localeMatcher: 'lookup'});
       })
     }
   }

@@ -16,7 +16,7 @@
           <h3>Modo Noturno</h3>
         </ion-text>
       </ion-label>
-      <ion-toggle color="primary"></ion-toggle>
+      <ion-toggle color="primary" (ionChange)="toggle(darkMode)" [(ngModel)]="darkMode" name="darkMode"></ion-toggle>
     </ion-item>
     <ion-item *ngFor="let option of menu" detail="true" routerLink="{{option.routerLink}}" detailIcon="../../assets/icons/chevron-right-solid.svg">
       <ion-icon color="primary" src="../../assets/icons/{{option.icon}}.svg" slot="start"></ion-icon>

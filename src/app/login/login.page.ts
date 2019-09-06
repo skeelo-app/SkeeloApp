@@ -16,6 +16,7 @@ export class LoginPage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
 
   public loginForm: FormGroup;
+  private id;
 
   constructor(
     private storage: Storage,
@@ -65,7 +66,8 @@ export class LoginPage implements OnInit {
           text: 'OK',
           handler: () => {
             this.router.navigateByUrl('/tabs');
-          this.storage.set('showIntro', false);
+            this.storage.set('showIntro', false);
+            this.storage.set('id', this.id);
           }
         }
       ]
@@ -112,6 +114,7 @@ export class LoginPage implements OnInit {
           let crypto = result.user_password;
           this.decrypt(crypto);
           if(this.decrypted == this.loginForm.value['password']) {
+            this.id = result.user_id;
             this.alertSuccess();
           } else {
             this.wrongPassword();

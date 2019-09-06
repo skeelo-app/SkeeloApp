@@ -29,7 +29,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.storage.get('showIntro').then((value) => {
-        if (value) {
+        if (value || value == null) {
           this.rootPage = '/intro';
           // console.log(this.rootPage);
           this.router.navigateByUrl(this.rootPage);

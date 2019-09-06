@@ -37,13 +37,15 @@ export class SkeeloApiService {
   }
 
   // PEDIDOS
-  getOrdersByOwner(owner) {
-    return this.http.get(this.apiUrl + 'orders/owner/' + owner);
+  getOrdersByUser(owner) {
+    return this.http.get(this.apiUrl + 'orders/user/' + owner);
   }
 
   getOrdersByID(id) {
     return this.http.get(this.apiUrl + 'orders/id/' + id);
   }
+
+  getOrders
 
   // LOJAS
   getStoreByID(id) {

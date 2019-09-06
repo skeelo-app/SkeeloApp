@@ -9,13 +9,14 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./app-preferences.page.scss'],
 })
 export class AppPreferencesPage implements OnInit {
-
+  
   constructor(
     private storage: Storage,
     private router: Router,
     public alertController: AlertController
-  ) { }
-
+    ) { }
+    
+  public darkMode: boolean;
   menu = [
     {
       name: 'Notificações',
@@ -56,6 +57,26 @@ export class AppPreferencesPage implements OnInit {
 
   logout() {
     this.confirmLogout();
+  }
+
+  getDarkMode() {
+    this.storage.get('darkMode').then((value) => {
+      this.darkMode = value;
+    });
+  }
+
+  toggle(value) {
+    if (value) {
+      this.darkMode = true;
+      this.storage.set('darkMode', value);
+    } else {
+      this.darkMode = false;
+      this.storage.set('darkMode', value);
+    }
+  }
+
+  ngAfterViewInit() {
+    this.getDarkMode();
   }
 
 }
