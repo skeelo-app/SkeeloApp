@@ -96,7 +96,7 @@ export class HomePage implements OnInit {
 
   getStore(id) {
     this.skeeloAPI.getStoreByID(id).subscribe(([result]: any) => {
-      this.lastOrder.order_storeName = result.store_name;
+      this.lastOrder.order_storeName = result.store_displayname;
     });
   }
 

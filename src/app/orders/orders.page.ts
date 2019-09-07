@@ -37,7 +37,7 @@ export class OrdersPage implements OnInit {
     let length = Object.keys(this.orders).length;
     for(let i = 0; i < length; i++) {
       this.skeeloAPI.getStoreByID(this.orders[i].order_store).subscribe(([result]: any) => {
-        this.orders[i].store_name = result.store_name;
+        this.orders[i].store_name = result.store_displayname;
       });
     }
   }

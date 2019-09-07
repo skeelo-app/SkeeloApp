@@ -18,8 +18,8 @@
             </ion-text>
           </ion-row>
           <ion-row>
-            <ion-text>
-              <p>{{order.order_store.store_name}}</p>
+            <ion-text [routerLink]="['/store', order.order_store.store_id]">
+              <p>{{order.order_store.store_displayname}}</p>
             </ion-text>
           </ion-row>
           <ion-row>
@@ -83,7 +83,7 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-      <ion-item *ngFor="let item of order.order_orderitems">
+      <ion-item *ngFor="let item of order.order_orderitems" [routerLink]="['/item-details', item.orderitems_item]" detail="false">
         <ion-grid>
           <ion-row>
             <ion-col size="3">

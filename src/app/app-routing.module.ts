@@ -19,7 +19,13 @@ const routes: Routes = [
   { path: 'intro', loadChildren: './intro/intro.module#IntroPageModule' },
   { path: 'be-partner', loadChildren: './be-partner/be-partner.module#BePartnerPageModule' },
   { path: 'bug-report', loadChildren: './bug-report/bug-report.module#BugReportPageModule' },
-  { path: 'profile/:id', loadChildren: './profile/profile.module#ProfilePageModule' }
+  { path: 'profile/:id', loadChildren: './profile/profile.module#ProfilePageModule' },
+  { path: 'item-details/:id', loadChildren: './item-details/item-details.module#ItemDetailsPageModule' },
+  { path: 'store/:id', loadChildren: './store/store.module#StorePageModule' },
+  { path: 'store-details/:id', loadChildren: './store-details/store-details.module#StoreDetailsPageModule' }
+
+
+
 
 
 ];

@@ -1,0 +1,52 @@
+:host {
+	ion-content {
+		--background: var(--ion-color-white);
+		background-color: var(--ion-color-white);
+	}
+	ion-col[img] {
+		ion-img {
+			width: 50%;
+			margin-left: 25%;
+		}
+	}
+	ion-row {
+		padding-left: 1.5%;
+		padding-right: 1.5%;
+	}
+	ion-col[desc] {
+		padding-top: 0;
+	}
+	ion-col {
+		h5[oldprice] {
+			text-decoration: line-through;
+			color: #afafaf;
+		}
+
+		hr {
+			color: #D1D1D1;
+			display: block;
+			border-style: solid;
+			border-width: 0.5px;
+			width: 100%;
+			box-sizing: border-box;
+			margin: 0;
+			background-color: white;
+		}
+		h2, p, h5 {
+			padding: 0;
+			margin: 0;
+		}
+		ion-item {
+      -webkit-padding-start: 0;
+      -webkit-padding-end: 0;
+      --padding-start: 4px;
+      --padding-end: 4px;
+    }
+		ion-textarea {
+      --background: var(--ion-color-graybg) !important;
+      border-radius: 4px !important;
+      --padding-start: 0px;
+      --padding-end: 0px;
+    }
+	}
+}

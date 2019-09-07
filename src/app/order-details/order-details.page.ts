@@ -35,6 +35,7 @@ export class OrderDetailsPage implements OnInit {
       store_id: '',
       store_location: '',
       store_name: '',
+      store_displayname: '',
       store_owner: '',
       store_phone: ''
     }
