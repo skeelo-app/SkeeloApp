@@ -12,16 +12,18 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../tab1/tab1.module#Tab1PageModule'
+            loadChildren: () =>
+            import('../pages/locations/locations.module').then(m => m.LocationsPageModule)
           }
         ]
       },
       {
-        path: 'grocerylist',
+        path: 'locations',
         children: [
           {
             path: '',
-            loadChildren: '../tab2/tab2.module#Tab2PageModule'
+            loadChildren: () =>
+            import('../pages/locations/locations.module').then(m => m.LocationsPageModule)
           }
         ]
       },
@@ -30,25 +32,28 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../home/home.module#HomePageModule'
+            loadChildren: () =>
+            import('../pages/home/home.module').then(m => m.HomePageModule)
           }
         ]
       },
       {
-        path: 'adresses',
+        path: 'cart',
         children: [
           {
             path: '',
-            loadChildren: '../tab3/tab3.module#Tab3PageModule'
+            loadChildren: () =>
+            import('../pages/cart/cart.module').then(m => m.CartPageModule)
           }
         ]
       },
       {
-        path: 'settings',
+        path: 'app-settings',
         children: [
           {
             path: '',
-            loadChildren: '../settings/settings.module#SettingsPageModule'
+            loadChildren: () =>
+              import('../pages/app-settings/app-settings.module').then(m => m.AppSettingsPageModule)
           }
         ]
       },
@@ -67,9 +72,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes)
-  ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class TabsPageRoutingModule {}

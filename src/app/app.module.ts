@@ -10,22 +10,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
+import { ChangeCpfPageModule } from './pages/change-cpf/change-cpf.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule,
-    IonicModule.forRoot(
-    {
+    BrowserModule, 
+    IonicModule.forRoot({
       mode: 'ios',
       rippleEffect: true
-    }
-  ),
-  AppRoutingModule,
-  IonicStorageModule.forRoot(),
-  HttpClientModule
-],
+    }), 
+    AppRoutingModule,
+    IonicStorageModule.forRoot(),
+    HttpClientModule,
+    ChangeCpfPageModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,

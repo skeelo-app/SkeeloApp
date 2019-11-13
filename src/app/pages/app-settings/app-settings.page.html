@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="icon-only" src="../../assets/icons/cog-solid.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Configurações</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full">
+    <ion-item *ngFor="let option of menu" detail="true" routerLink="{{option.routerLink}}" detailIcon="../../assets/icons/chevron-right-solid.svg">
+      <ion-icon color="primary" src="../../assets/icons/{{option.icon}}.svg" slot="start"></ion-icon>
+      <ion-label class="ion-text-wrap">{{option.name}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

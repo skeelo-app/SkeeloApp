@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar color="white">
+    <ion-buttons slot="start">
+      <ion-back-button text="" color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary">Meu Carrinho</ion-title>
+    <ion-buttons slot="end" *ngIf="!emptyCart">
+      <ion-button color="medium" (click)="clearCart()">
+        <ion-icon src="../../../assets/icons/trash-alt-solid.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="!emptyCart">
+    <ion-item *ngFor="let item of items" color="white" detail="false">
+      <ion-grid>
+        <ion-row class="ion-align-items-center ion-justify-content-center">
+          <ion-col size="auto" class="icons" (click)="removeFromCart(item.item_id, item.item_unityPrice, item.item_quantity)">
+            <ion-button color="danger" class="is-icon">
+              <ion-icon slot="icon-only" src="../../../assets/icons/times-light.svg"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-label class="ion-text-wrap">
+              <ion-text color="primarydark">
+                <b>{{item.item_quantity}}x</b>
+              </ion-text>
+              {{item.item_name}}
+            </ion-label>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-text color="primarydark">
+              <p class="price">{{item.item_totalPrice}}</p>
+            </ion-text>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-icon color="primarydark" src="../../../assets/icons/ellipsis-v-regular.svg"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center ion-justify-content-end">
+          <ion-col size="auto">
+            <ion-text>
+              <h2>Total:</h2>
+            </ion-text>
+          </ion-col>
+          <ion-col size="auto" class="ion-align-self-end">
+            <ion-text color="success">
+              <h3>{{items.totalCartFormat}}</h3>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="emptyCart">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <h1>Oops...</h1>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <p translucent>Seu carrinho está vazio!</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-icon no-button src="../../../assets/icons/frown-regular.svg"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<ion-footer *ngIf="!emptyCart">
+  <ion-toolbar color="primary" (click)="finish()">
+    <ion-title>Finalizar pedido</ion-title>
+  </ion-toolbar>
+</ion-footer>

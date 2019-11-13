@@ -1,0 +1,208 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text="" color="white"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="white">{{store.store_displayname}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="image">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col img class="ion-align-self-center">
+          <ion-avatar>
+            <img src="../../../assets/img/figuresquare.svg">
+          </ion-avatar>
+          <!-- <ion-img src="../../../assets/img/figuresquare.svg"></ion-img> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div class="details">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <p class="title">Reputação</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="auto">
+          <ion-text color="primary">
+            <h1>{{store.store_rate}}</h1>
+          </ion-text>
+        </ion-col>
+        <ion-col size="0.5"></ion-col>
+        <ion-col size="auto">
+          <ion-icon class="star" [color]="store.store_rate > 1 ? 'primary' : 'medium'" src="../../../assets/icons/star-solid.svg"></ion-icon>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-icon class="star" [color]="store.store_rate > 2 ? 'primary' : 'medium'" src="../../../assets/icons/star-solid.svg"></ion-icon>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-icon class="star" [color]="store.store_rate > 3 ? 'primary' : 'medium'" src="../../../assets/icons/star-solid.svg"></ion-icon>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-icon class="star" [color]="store.store_rate > 4 ? 'primary' : 'medium'" src="../../../assets/icons/star-solid.svg"></ion-icon>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-icon class="star" [color]="store.store_rate > 5 ? 'primary' : 'medium'" src="../../../assets/icons/star-solid.svg"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-text color="primary">
+          <p class="semi-bold">Média de {{store.store_numrates}} avaliações.</p>
+        </ion-text>
+      </ion-row>
+      <ion-row align-items-center>
+        <ion-col>
+          <hr>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <p class="title">Localização</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="medium">
+            <p>{{store.store_locationInfo.location_city}}, {{store.store_locationInfo.location_province}}</p>
+          </ion-text>
+          <ion-text color="medium">
+            <p>{{store.store_locationInfo.location_address}}, {{store.store_locationInfo.location_number}} - {{store.store_locationInfo.location_neighbourhood}}</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button size="block" color="primary">
+            <ion-ripple-effect></ion-ripple-effect>
+            <ion-icon src="../../../assets/icons/twitter-square-brands.svg" color="white"></ion-icon>
+            Abrir no Maps
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <p class="title">Horário de Funcionamento</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="medium">
+            <p>Domingo</p>
+          </ion-text>  
+        </ion-col>
+        <ion-col>
+          <ion-text color="medium">
+            <p>09:00 às 13:00</p>
+          </ion-text>  
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="medium">
+            <p>Segunda-feira</p>
+          </ion-text>  
+        </ion-col>
+        <ion-col>
+          <ion-text color="medium">
+            <p>08:30 às 22:00</p>
+          </ion-text>  
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="medium">
+            <p>Terça-feira</p>
+          </ion-text>  
+        </ion-col>
+        <ion-col>
+          <ion-text color="medium">
+            <p>08:30 às 22:00</p>
+          </ion-text>  
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="medium">
+            <p>Quarta-feira</p>
+          </ion-text>  
+        </ion-col>
+        <ion-col>
+          <ion-text color="medium">
+            <p>08:30 às 22:00</p>
+          </ion-text>  
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="medium">
+            <p>Quinta-feira</p>
+          </ion-text>  
+        </ion-col>
+        <ion-col>
+          <ion-text color="medium">
+            <p>08:30 às 22:00</p>
+          </ion-text>  
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="medium">
+            <p>Sexta-feira</p>
+          </ion-text>  
+        </ion-col>
+        <ion-col>
+          <ion-text color="medium">
+            <p>08:30 às 22:00</p>
+          </ion-text>  
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="medium">
+            <p>Sábado</p>
+          </ion-text>  
+        </ion-col>
+        <ion-col>
+          <ion-text color="medium">
+            <p>09:00 às 17:30</p>
+          </ion-text>  
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <p class="title">Contato</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="medium">
+            <p class="tel">{{store.store_phone}}</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

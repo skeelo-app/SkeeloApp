@@ -1,31 +1,33 @@
 <ion-tabs>
 
   <ion-tab-bar slot="bottom">
+
     <ion-tab-button tab="search" layout="label-hide">
-      <ion-icon src="../../assets/icons/search-light.svg"></ion-icon>
-      <ion-label>Procurar</ion-label>
+      <ion-icon src="../../../assets/icons/search-light.svg"></ion-icon>
+      <ion-label>Search</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="grocerylist" layout="label-hide">
-      <ion-icon src="../../assets/icons/clipboard-list-light.svg"></ion-icon>
-      <ion-label>Lista de Compras</ion-label>
+    <ion-tab-button tab="locations" layout="label-hide">
+      <ion-icon src="../../../assets/icons/compass-light.svg"></ion-icon>
+      <ion-label>Locations</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="home" layout="label-hide">
-      <ion-icon src="../../assets/icons/store-light.svg"></ion-icon>
+      <ion-icon src="../../../assets/icons/store-light.svg"></ion-icon>
       <ion-label>Home</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="adresses" layout="label-hide">
-      <ion-icon src="../../assets/icons/compass-light.svg"></ion-icon>
-      <ion-label>Endereços</ion-label>
+    <ion-tab-button tab="cart" layout="label-hide">
+      <ion-icon src="../../../assets/icons/shopping-cart-light.svg"></ion-icon>
+      <ion-label>Home</ion-label>
+      <ion-badge>{{cartBadge}}</ion-badge>
     </ion-tab-button>
 
-    <ion-tab-button tab="settings" layout="label-hide">
-      <ion-icon src="../../assets/icons/cogs-light.svg"></ion-icon>
-      <ion-label>Configurações</ion-label>
+    <ion-tab-button tab="app-settings" layout="label-hide">
+      <ion-icon src="../../../assets/icons/cog-light.svg"></ion-icon>
+      <ion-label>Settings</ion-label>
     </ion-tab-button>
+
   </ion-tab-bar>
-
 
 </ion-tabs>

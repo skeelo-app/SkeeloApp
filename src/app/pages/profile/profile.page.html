@@ -1,0 +1,147 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{user.user_displayName}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/edit-profile', user.user_id]">
+        <ion-icon src="../../../assets/icons/edit-regular.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="image">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col img class="ion-align-self-center">
+          <ion-avatar>
+            <img src="../../../assets/img/figuresquare.svg">
+          </ion-avatar>
+          <!-- <ion-img src="../../../assets/img/figuresquare.svg"></ion-img> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div class="details">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-text color="primary">
+            <p class="semi-bold">Nome</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <p>{{user.user_name}}</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="primary">
+            <p class="semi-bold">E-mail</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <p>{{user.user_email}}</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="primary">
+            <p class="semi-bold">CPF</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <p>{{user.user_cpf}}</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="primary">
+            <p class="semi-bold">Telefone</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <p>{{user.user_phone}}</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="primary">
+            <p class="semi-bold">Data de Nascimento</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <p>{{user.user_birthdate}}</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="primary">
+            <p class="semi-bold">Senha</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            <p>&bull;&bull;&bull;&bull;&bull;&bull;&bull;</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </div>
+</ion-content>

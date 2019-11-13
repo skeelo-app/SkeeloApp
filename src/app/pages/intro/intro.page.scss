@@ -1,0 +1,52 @@
+:host {
+  ion-grid, ion-row, ion-col {
+    margin: 0;
+    padding: 0;
+  }
+  ion-slides, ion-slide {
+    height: 100%;
+    background-color: var(--ion-color-primary);
+    --bullet-background: var(--ion-color-white);
+    --bullet-background-active: var(--ion-color-white);
+  }
+  ion-text {
+    color: var(--ion-color-white);
+    p, h1 {
+      margin: 0;
+    }
+  }
+  ion-row[padding-top] {
+    padding-top: 16px;
+  }
+  ion-slide[slide1] {
+    ion-img {
+      width: 90%;
+      margin-left: 5%;
+    }
+  }
+  ion-slide[slide2] {
+    ion-img {
+      width: 54%;
+      margin-left: 23%;
+    }
+  }
+  ion-slide[slide3] {
+    ion-img {
+      width: 54%;
+      margin-left: 23%;
+    }
+  }
+  ion-slide[slide4] {
+    // background-image: url("../../../assets/img/bgIntro.png");
+    // background-repeat: repeat;
+    // background-size: contain;
+    // background-blend-mode: soft-light;
+    ion-button {
+      -webkit-margin-start: 16px;
+      -webkit-margin-end: 16px;
+      --color: var(--ion-color-primary) !important;
+      --background: var(--ion-color-white);
+      --border-radius: 4px;
+    }
+  }
+}

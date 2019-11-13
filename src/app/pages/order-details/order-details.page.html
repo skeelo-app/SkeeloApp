@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pedido {{order.order_id}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div details>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-row>
+            <ion-text>
+              <p title>Loja</p>
+            </ion-text>
+          </ion-row>
+          <ion-row>
+            <ion-text *ngIf="order.order_store.store_displayname" [routerLink]="['/store', order.order_store.store_id]">
+              <p>{{order.order_store.store_displayname}}</p>
+            </ion-text>
+            <ion-skeleton-text *ngIf="!order.order_store.store_displayname" animated style="width: 100%"></ion-skeleton-text>
+          </ion-row>
+          <ion-row>
+            <ion-text>
+              <p title>Itens</p>
+            </ion-text>
+          </ion-row>
+          <ion-row>
+            <ion-text *ngIf="order.order_items">
+              <p *ngIf="order.order_items == 1">{{order.order_items}} item</p>
+              <p *ngIf="order.order_items > 1">{{order.order_items}} itens</p>
+            </ion-text>
+            <ion-skeleton-text *ngIf="!order.order_items" animated style="width: 100%"></ion-skeleton-text>
+          </ion-row>
+          <ion-row>
+            <ion-text>
+              <p title>Valor</p>
+            </ion-text>
+          </ion-row>
+          <ion-row>
+            <ion-text *ngIf="order.order_price">
+              <p>{{order.order_price}}</p>
+            </ion-text>
+            <ion-skeleton-text *ngIf="!order.order_price" animated style="width: 100%"></ion-skeleton-text>
+          </ion-row>
+          <ion-row>
+            <ion-text>
+              <p title>Data</p>
+            </ion-text>
+          </ion-row>
+          <ion-row>
+            <ion-text *ngIf="order.order_date">
+              <p>{{order.order_date}}</p>
+            </ion-text>
+            <ion-skeleton-text *ngIf="!order.order_date" animated style="width: 100%"></ion-skeleton-text>
+          </ion-row>
+        </ion-col>
+        <ion-col img>
+          <ion-img src="../../../assets/img/figure.svg"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div items>
+    <ion-list lines="full">
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3" class="ion-align-self-center">
+              <ion-text>
+                <p title>Qntd.</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6" class="ion-align-self-center">
+              <ion-text>
+                <p title>Item</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="3" class="ion-align-self-center">
+              <ion-text>
+                <p title>Preço</p>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item *ngFor="let item of order.order_orderitems" [routerLink]="['/item-details', item.orderitems_item]" detail="false">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3" class="ion-align-self-center">
+              <ion-text *ngIf="item.orderitems_quantity" color="text">
+                <p item>{{item.orderitems_quantity}}</p>
+              </ion-text>
+              <ion-skeleton-text *ngIf="!item.orderitems_quantity" animated style="width: 90%"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="6" class="ion-align-self-center">
+              <ion-text *ngIf="item.orderitems_itemname">
+                <p item>{{item.orderitems_itemname}}</p>
+              </ion-text>
+              <ion-skeleton-text *ngIf="!item.orderitems_itemname" animated style="width: 95%"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="3" class="ion-align-self-center">
+              <ion-text *ngIf="item.orderitems_finalprice">
+                <p item>{{item.orderitems_finalprice}}</p>
+              </ion-text>
+              <ion-skeleton-text *ngIf="!item.orderitems_finalprice" animated style="width: 90%"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

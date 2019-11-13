@@ -2,32 +2,33 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
-  { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
-  { path: 'home', loadChildren: './home/home.module#HomePageModule' },
-  { path: 'orders', loadChildren: './orders/orders.module#OrdersPageModule' },
-  { path: 'payment-methods', loadChildren: './payment-methods/payment-methods.module#PaymentMethodsPageModule' },
-  { path: 'app-preferences', loadChildren: './app-preferences/app-preferences.module#AppPreferencesPageModule' },
-  { path: 'help', loadChildren: './help/help.module#HelpPageModule' },
-  { path: 'notifications', loadChildren: './notifications/notifications.module#NotificationsPageModule' },
-  { path: 'about', loadChildren: './about/about.module#AboutPageModule' },
-  { path: 'order-details/:id', loadChildren: './order-details/order-details.module#OrderDetailsPageModule' },
-  { path: 'add-payment-method', loadChildren: './add-payment-method/add-payment-method.module#AddPaymentMethodPageModule' },
-  { path: 'edit-payment-method/:id', loadChildren: './edit-payment-method/edit-payment-method.module#EditPaymentMethodPageModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'sign-up', loadChildren: './sign-up/sign-up.module#SignUpPageModule' },
-  { path: 'intro', loadChildren: './intro/intro.module#IntroPageModule' },
-  { path: 'be-partner', loadChildren: './be-partner/be-partner.module#BePartnerPageModule' },
-  { path: 'bug-report', loadChildren: './bug-report/bug-report.module#BugReportPageModule' },
-  { path: 'profile/:id', loadChildren: './profile/profile.module#ProfilePageModule' },
-  { path: 'item-details/:id', loadChildren: './item-details/item-details.module#ItemDetailsPageModule' },
-  { path: 'store/:id', loadChildren: './store/store.module#StorePageModule' },
-  { path: 'store-details/:id', loadChildren: './store-details/store-details.module#StoreDetailsPageModule' }
-
-
-
-
-
+  {
+    path: '',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
+  { path: 'about', loadChildren: './pages/about/about.module#AboutPageModule' },
+  { path: 'be-partner', loadChildren: './pages/be-partner/be-partner.module#BePartnerPageModule' },
+  { path: 'bug-report', loadChildren: './pages/bug-report/bug-report.module#BugReportPageModule' },
+  { path: 'order-details/:id', loadChildren: './pages/order-details/order-details.module#OrderDetailsPageModule' },
+  { path: 'orders', loadChildren: './pages/orders/orders.module#OrdersPageModule' },
+  { path: 'intro', loadChildren: './pages/intro/intro.module#IntroPageModule' },
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
+  { path: 'profile/:id', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
+  { path: 'sign-up', loadChildren: './pages/sign-up/sign-up.module#SignUpPageModule' },
+  { path: 'store/:id', loadChildren: './pages/store/store.module#StorePageModule' },
+  { path: 'store-details/:id', loadChildren: './pages/store-details/store-details.module#StoreDetailsPageModule' },
+  { path: 'app-settings', loadChildren: './pages/app-settings/app-settings.module#AppSettingsPageModule' },
+  { path: 'app-preferences', loadChildren: './pages/app-preferences/app-preferences.module#AppPreferencesPageModule' },
+  { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
+  { path: 'item-details/:id', loadChildren: './pages/item-details/item-details.module#ItemDetailsPageModule' },
+  { path: 'notifications', loadChildren: './pages/notifications/notifications.module#NotificationsPageModule' },
+  { path: 'locations', loadChildren: './pages/locations/locations.module#LocationsPageModule' },
+  { path: 'cart', loadChildren: './pages/cart/cart.module#CartPageModule' },
+  { path: 'finish-order', loadChildren: './pages/finish-order/finish-order.module#FinishOrderPageModule' },
+  { path: 'change-cpf', loadChildren: './pages/change-cpf/change-cpf.module#ChangeCpfPageModule' },
+  { path: 'store-list', loadChildren: './pages/store-list/store-list.module#StoreListPageModule' },
+  { path: 'order-progress/:id', loadChildren: './pages/order-progress/order-progress.module#OrderProgressPageModule' }
 ];
 @NgModule({
   imports: [

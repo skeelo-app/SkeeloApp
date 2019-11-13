@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mercados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let store of stores" [routerLink]="['/store', store.store_id]">
+      <ion-avatar item-left>
+        <img src="../../../assets/img/figuresquare.svg" alt="">
+      </ion-avatar>
+      <h2>{{store.store_displayname}}</h2>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-toolbar color="white">
+    <ion-buttons slot="start">
+      <ion-back-button text="" color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary">Item {{item.item_barcode}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col img class="ion-align-self-center">
+        <ion-img src="../../../assets/img/figurewithoutbg.svg"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <hr>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col class="ion-align-self-center" *ngIf="item.item_discount == 0 || item.item_discount == null">
+        <ion-text color="primary">
+          <h2>{{item.item_price}}</h2>
+        </ion-text>
+      </ion-col>
+      <ion-col class="ion-align-self-center" *ngIf="item.item_discount == 1" size="auto">
+        <ion-text color="primary">
+          <h2>{{item.item_pricewithdiscount}}</h2>
+        </ion-text>
+      </ion-col>
+      <ion-col class="ion-align-self-center" *ngIf="item.item_discount == 1">
+        <ion-text>
+          <h5 oldprice>{{item.item_price}}</h5>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="item.item_discount == 1 && item.item_discounttype == 0">
+      <ion-col desc>
+        <ion-text color="medium">
+          <p><ion-text color="primary">{{item.item_discountpercent}}%</ion-text> de desconto</p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col class="ion-align-self-center">
+        <ion-text>
+          <h2>{{item.item_name}}, {{item.item_amount}}</h2>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col class="ion-align-self-center" desc>
+        <ion-text>
+          <p>{{item.item_description}}</p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="2">
+        <ion-img src="../../../assets/img/figure.svg"></ion-img>
+      </ion-col>
+      <ion-col>
+        <ion-text color="primary" class="ion-text-wrap" [routerLink]="['/store', item.item_store]">
+          <h5><b>{{item.item_storename}}</b></h5>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <hr>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <ion-text color="primary">
+          <p>Instruções adicionais (ex: Gelado, maduro, etc)</p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <ion-item lines="none">
+          <ion-textarea rows="4" required spellcheck="true" class="ion-wrap" autoGrow="true"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="white">
+    <ion-grid>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col size="auto" class="icons" (click)="minusCart()">
+          <ion-icon color="danger" src="../../../assets/icons/minus-solid.svg"></ion-icon>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-text>
+            <h3>{{item.item_cartCounter}}</h3>
+          </ion-text>
+        </ion-col>
+        <ion-col size="auto" class="icons" (click)="plusCart()">
+          <ion-icon color="success" src="../../../assets/icons/plus-solid.svg"></ion-icon>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-text>
+            <h3>{{item.item_cartPrice}}</h3>
+          </ion-text>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button expand="block" color="primary" (click)="addToCart()">
+            <ion-text>
+              Adicionar ao
+            </ion-text>
+            <ion-icon slot="end" src="../../../assets/icons/cart-plus-solid.svg"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

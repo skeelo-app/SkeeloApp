@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Adicionar CPF</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            <ion-text class="ion-text-wrap">
+              Deseja CPF?
+            </ion-text>
+          </ion-label>
+          <ion-toggle color="primary" (ionChange)="toggle(option)" [(ngModel)]="option"></ion-toggle>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <form [formGroup]="form">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">
+              <ion-text color="primary">
+                <h3>CPF</h3>
+              </ion-text>
+            </ion-label>
+            <ion-input (ionChange)="check()" formControlName="cpf" type="text" [brmasker]="{mask: '000.000.000-00', type:'num'}" clearInput></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <br>
+      <ion-row>
+        <ion-col>
+          <ion-button size="block" color="primary" [disabled]="(!valid)" (click)="dismiss()">
+            <ion-ripple-effect></ion-ripple-effect>
+            Salvar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>
