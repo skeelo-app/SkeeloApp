@@ -29,7 +29,8 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      // this.statusBar.styleDefault();
+      this.statusBar.styleBlackTranslucent();
       this.splashScreen.hide();
       this.storageService.setCart(this.cart);
       let settings = this.storageService.getUserSettings();
