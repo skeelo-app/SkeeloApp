@@ -9,16 +9,18 @@
 
 <ion-content>
   <div class="search">
-    <ion-searchbar [(ngModel)]="search" searchIcon="../../../../assets/icons/search-solid.svg" placeholder="Pesquise qualquer coisa" (ionChange)="filter()"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="search" searchIcon="../../../../assets/icons/search-solid.svg" placeholder="Pesquise por estabelecimentos" (ionChange)="filter()"></ion-searchbar>
   </div>
   <div class="margin-top">
     <ion-list>
-      <ion-item *ngFor="let store of stores" [routerLink]="['/store', store.store_id]">
-        <ion-avatar item-left>
-          <img src="../../../assets/img/figuresquare.svg" alt="">
-        </ion-avatar>
-        <p>{{store.store_displayname}}</p>
-      </ion-item>
+      <ion-virtual-scroll [items]="stores">
+        <ion-item *virtualItem="let store" [routerLink]="['/store', store.store_id]">
+          <ion-avatar item-left>
+            <img src="../../../assets/img/figuresquare.svg" alt="">
+          </ion-avatar>
+          <p>{{store.store_displayname}}</p>
+        </ion-item>
+      </ion-virtual-scroll>
     </ion-list>
   </div>
 </ion-content>
