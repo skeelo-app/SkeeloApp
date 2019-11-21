@@ -1,5 +1,6 @@
 :host {
   ion-item {
+    padding-top: 8px;
     --min-height: 64px !important;
     h3 {
       font-weight: 500 !important;
@@ -27,9 +28,6 @@
   }
   ion-grid, ion-col, ion-row {
     padding: 0;
-  }
-  ion-list {
-    padding-top: 8px;
   }
   ion-icon[no-button] {
     font-size: 120px;

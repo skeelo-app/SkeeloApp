@@ -8,9 +8,7 @@
 </ion-header>
 
 <ion-content>
-
   
-
   <ion-list lines="full" *ngIf="showOrders == true">
     <ion-virtual-scroll [items]="orders">
       <ion-item *virtualItem="let order" detail="false" [routerLink]="order.order_progress == 4 ? ['/order-details', order.order_id] : ['/order-progress', order.order_id]">
@@ -46,6 +44,7 @@
       </ion-item>
     </ion-virtual-scroll>
   </ion-list>
+
   <div *ngIf="showOrders == false">
     <ion-grid>
       <ion-row>

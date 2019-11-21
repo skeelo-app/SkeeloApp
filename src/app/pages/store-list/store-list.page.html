@@ -3,17 +3,22 @@
     <ion-buttons slot="start">
       <ion-back-button text="" color="primary"></ion-back-button>
     </ion-buttons>
-    <ion-title>Mercados</ion-title>
+    <ion-title color="primary">Estabelecimentos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let store of stores" [routerLink]="['/store', store.store_id]">
-      <ion-avatar item-left>
-        <img src="../../../assets/img/figuresquare.svg" alt="">
-      </ion-avatar>
-      <h2>{{store.store_displayname}}</h2>
-    </ion-item>
-  </ion-list>
+  <div class="search">
+    <ion-searchbar [(ngModel)]="search" searchIcon="../../../../assets/icons/search-solid.svg" placeholder="Pesquise qualquer coisa" (ionChange)="filter()"></ion-searchbar>
+  </div>
+  <div class="margin-top">
+    <ion-list>
+      <ion-item *ngFor="let store of stores" [routerLink]="['/store', store.store_id]">
+        <ion-avatar item-left>
+          <img src="../../../assets/img/figuresquare.svg" alt="">
+        </ion-avatar>
+        <p>{{store.store_displayname}}</p>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

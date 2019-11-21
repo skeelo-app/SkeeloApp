@@ -10,33 +10,35 @@
 </ion-header>
 
 <ion-content>
-  <div class="search">
+  <!-- <div class="search">
     <ion-searchbar searchIcon="../../../../assets/icons/search-solid.svg" placeholder="Pesquise qualquer coisa"></ion-searchbar>
-  </div>
+  </div> -->
 
   <div class="margin-top">
-    <ion-text color="purple">
+    <ion-text color="primary">
       <p>Escolha por onde começar</p>
     </ion-text>
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-button color="purple" class="margin-right">
+          <ion-button class="products">
             <ion-ripple-effect></ion-ripple-effect>
             Produtos
           </ion-button>
         </ion-col>
+      </ion-row>
+      <ion-row>
         <ion-col>
-          <ion-button color="purplelight" class="margin-left" routerLink="/store-list">
+          <ion-button class="stores" routerLink="/store-list">
             <ion-ripple-effect></ion-ripple-effect>
-            Mercados
+            Estabelecimentos
           </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
 
-  <div class="promotions">
+  <!-- <div class="promotions">
     <ion-text color="primary">
       <p>Promoções perto de você</p>
     </ion-text>
@@ -47,7 +49,7 @@
         </ion-text>
       </ion-slide>
     </ion-slides>
-  </div>
+  </div> -->
 
   <div class="lastOrder" *ngIf="showLastOrder == true">
     <ion-text color="primary">

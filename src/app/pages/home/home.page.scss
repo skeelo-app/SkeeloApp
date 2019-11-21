@@ -47,13 +47,13 @@
       height: 128px;
       font-size: 22px;
     }
-    ion-button.margin-right {
-      margin-right: 6.5px;
-      margin-left: 0;
+    ion-button.products {
+      --background: url('../../../assets/img/bgProducts.png');
+      background-size: cover;
     }
-    ion-button.margin-left {
-      margin-left: 6.5px;
-      margin-right: 0;
+    ion-button.stores {
+      --background: url('../../../assets/img/bgStores.png');
+      background-size: cover;
     }
   }
 
