@@ -37,6 +37,13 @@ export class SkeeloApiService {
     return this.http.get(this.apiUrl + 'users/phone/' + phone);
   }
 
+  editUser(id, body) {
+    let headers: {
+      'Content-Type': 'application/json'
+    };
+    return this.http.put(this.apiUrl + 'users/update/' + id, body, {headers});
+  }
+
   // PEDIDOS
   getOrdersByUser(owner) {
     return this.http.get(this.apiUrl + 'orders/user/' + owner);

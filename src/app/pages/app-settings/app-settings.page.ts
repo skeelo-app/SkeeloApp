@@ -15,11 +15,11 @@ export class AppSettingsPage implements OnInit {
       icon: 'utensils-solid',
       routerLink: '/orders'
     },
-    {
-      name: 'Métodos de Pagamento',
-      icon: 'money-check-alt-solid',
-      routerLink: '/payment-methods'
-    },
+    // {
+    //   name: 'Métodos de Pagamento',
+    //   icon: 'money-check-alt-solid',
+    //   routerLink: '/payment-methods'
+    // },
     {
       name: 'Preferências do App',
       icon: 'sliders-h-solid',
