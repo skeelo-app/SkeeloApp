@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="primary">Editar item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+        <ion-img src="../../../assets/img/figure.svg"></ion-img>
+      </ion-col>
+      <ion-col class="ion-align-self-center">
+        <ion-row>
+          <ion-col class="ion-align-self-center">
+            <ion-text class="title">
+              {{item.item_name}}
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="auto" class="ion-align-self-center">
+            <ion-text class="price" color="primary">{{item.item_price}}</ion-text>
+          </ion-col>
+          <ion-col class="ion-align-self-center">
+            <ion-text class="text">(preço unitário)</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-align-self-center" size="1.5" (click)="minusCart()">
+        <ion-icon src="../../../assets/icons/minus-square-solid.svg" color="danger"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-align-self-center" size="1.5" (click)="plusCart()">
+        <ion-icon src="../../../assets/icons/plus-square-solid.svg" color="success"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-align-self-center" size="3.75">
+        <ion-button fill="outline" size="block">
+          <ion-text>
+            {{quantity}}
+          </ion-text>
+        </ion-button>
+      </ion-col>
+      <ion-col class="ion-align-self-center" size="3.75">
+          <ion-button size="block">
+            <ion-text>
+							{{item.item_cartPrice}}
+            </ion-text>
+          </ion-button>
+      </ion-col>
+      <ion-col class="ion-align-self-center" size="1.5" (click)="removeFromCart()">
+          <ion-icon src="../../../assets/icons/trash-alt-solid.svg" color="medium"></ion-icon>
+      </ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<ion-button color="primary" size="block" (click)="saveItem()">
+					<ion-text>
+						Salvar
+					</ion-text>
+				</ion-button>
+			</ion-col>
+		</ion-row>
+  </ion-grid>
+</ion-content>

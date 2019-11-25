@@ -3,6 +3,7 @@ import { SkeeloApiService } from 'src/app/services/skeeloApi/skeelo-api.service'
 import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storageService/storage.service';
+import { EditItemPage } from '../edit-item/edit-item.page';
 
 @Component({
   selector: 'app-cart',
@@ -19,6 +20,7 @@ export class CartPage implements OnInit {
     private storageService: StorageService,
     private skeeloAPI: SkeeloApiService,
     public alertController: AlertController,
+    public modalController: ModalController,
     private router: Router,
   ) { }
 
@@ -44,6 +46,23 @@ export class CartPage implements OnInit {
         this.items.totalCartFormat = total;
       });
     }
+  }
+
+  async presentModal(id, quantity, length) {
+    const modal = await this.modalController.create({
+      component: EditItemPage,
+      componentProps: {
+        'id': id,
+        'quantity': quantity,
+        'length': length
+      },
+      showBackdrop: true,
+      cssClass: 'modal-cpf'
+    });
+    await modal.present();
+    await modal.onDidDismiss().then((data) => {
+      this.showCart();
+    })
   }
 
   async alertConfirm(title) {
@@ -76,28 +95,6 @@ export class CartPage implements OnInit {
     return choice
   }
 
-  removeFromCart(id, price, quantity) {
-    let title = 'Deseja realmente remover do carrinho?'
-    this.alertConfirm(title).then((value) => {
-      if(value.data) {
-        let length = this.items.length;
-        for(let i = 0; i < length; i++) {
-          if(this.items[i].item_id == id) {
-            let newPrice = parseFloat(price) * quantity;
-            this.items.totalCart -= newPrice;
-            let total = (this.items.totalCart).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-            this.items.totalCartFormat = total;
-            this.items.splice(i, 1);
-            i--;
-            this.storageService.setCart(this.items);
-            this.items.totalCart = 0;
-            this.getItemDetails();
-          }
-        }
-      }
-    })  
-  }
-
   clearCart() {
     let title = 'Deseja realmente limpar seu carrinho?';
     this.alertConfirm(title).then((value) => {
@@ -117,10 +114,15 @@ export class CartPage implements OnInit {
     this.router.navigateByUrl('/finish-order');
   }
 
-  ionViewWillEnter() {
+  showCart() {
     this.items = this.storageService.getCart();
     this.items.totalCart = 0;
     this.getItemDetails();
+    console.log(this.items);
+  }
+
+  ionViewWillEnter() {
+    this.showCart();
   }
 
 }

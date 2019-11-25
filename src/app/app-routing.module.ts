@@ -29,7 +29,8 @@ const routes: Routes = [
   { path: 'change-cpf', loadChildren: './pages/change-cpf/change-cpf.module#ChangeCpfPageModule' },
   { path: 'store-list', loadChildren: './pages/store-list/store-list.module#StoreListPageModule' },
   { path: 'order-progress/:id', loadChildren: './pages/order-progress/order-progress.module#OrderProgressPageModule' },
-  { path: 'edit-profile/:id', loadChildren: './pages/edit-profile/edit-profile.module#EditProfilePageModule' }
+  { path: 'edit-profile/:id', loadChildren: './pages/edit-profile/edit-profile.module#EditProfilePageModule' },  { path: 'edit-item', loadChildren: './pages/edit-item/edit-item.module#EditItemPageModule' }
+
 
 ];
 @NgModule({

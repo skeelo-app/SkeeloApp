@@ -17,11 +17,11 @@
     <ion-item *ngFor="let item of items" color="white" detail="false">
       <ion-grid>
         <ion-row class="ion-align-items-center ion-justify-content-center">
-          <ion-col size="auto" class="icons" (click)="removeFromCart(item.item_id, item.item_unityPrice, item.item_quantity)">
+          <!-- <ion-col size="auto" class="icons" (click)="removeFromCart(item.item_id, item.item_unityPrice, item.item_quantity)">
             <ion-button color="danger" class="is-icon">
               <ion-icon slot="icon-only" src="../../../assets/icons/times-light.svg"></ion-icon>
             </ion-button>
-          </ion-col>
+          </ion-col> -->
           <ion-col>
             <ion-label class="ion-text-wrap">
               <ion-text color="primarydark">
@@ -35,7 +35,7 @@
               <p class="price">{{item.item_totalPrice}}</p>
             </ion-text>
           </ion-col>
-          <ion-col size="auto">
+          <ion-col size="auto" (click)="presentModal(item.item_id, item.item_quantity, item.item_length)">
             <ion-icon color="primarydark" src="../../../assets/icons/ellipsis-v-regular.svg"></ion-icon>
           </ion-col>
         </ion-row>

@@ -190,7 +190,8 @@ export class ItemDetailsPage implements OnInit {
               cartArray[this.cart] = {
                 item_id: this.item.item_id,
                 item_quantity: this.item.item_cartCounter,
-                item_store: this.item.item_store
+                item_store: this.item.item_store,
+                item_length: this.cart
               };
               this.storageService.setCart(cartArray);
               this.alertSuccess();
@@ -209,7 +210,8 @@ export class ItemDetailsPage implements OnInit {
       cartArray[this.cart] = {
         item_id: this.item.item_id,
         item_quantity: this.item.item_cartCounter,
-        item_store: this.item.item_store
+        item_store: this.item.item_store,
+        item_length: this.cart
       };
       this.storageService.setCart(cartArray);
       this.alertSuccess();
@@ -228,7 +230,8 @@ export class ItemDetailsPage implements OnInit {
     cartArray[this.cart] = {
       item_id: this.item.item_id,
       item_quantity: this.item.item_cartCounter,
-      item_store: this.item.item_store
+      item_store: this.item.item_store,
+      item_length: this.cart
     };
     this.storageService.setCart(cartArray);
     this.alertSuccess();
