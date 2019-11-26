@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SkeeloApiService } from 'src/app/services/skeeloApi/skeelo-api.service';
+import { AlertController, ModalController } from '@ionic/angular';
+import { SearchResultPage } from '../search-result/search-result.page';
 
 @Component({
   selector: 'app-store',
@@ -19,10 +21,31 @@ export class StorePage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private skeeloAPI: SkeeloApiService
+    private skeeloAPI: SkeeloApiService,
+    public alertController: AlertController,
+    public modalController: ModalController
   ) { }
 
+  async presentModal(store) {
+    const modal = await this.modalController.create({
+      component: SearchResultPage,
+      componentProps: {
+        'id': store
+      },
+      showBackdrop: true,
+      cssClass: 'modal-search'
+    });
+    await modal.present();
+    await modal.onDidDismiss().then((data) => {
+
+    })
+  }
+
   ngOnInit() {
+  }
+
+  search() {
+    this.presentModal(this.id);
   }
 
   getStore() {

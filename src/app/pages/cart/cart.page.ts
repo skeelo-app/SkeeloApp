@@ -57,7 +57,7 @@ export class CartPage implements OnInit {
         'length': length
       },
       showBackdrop: true,
-      cssClass: 'modal-cpf'
+      cssClass: 'modal-cart'
     });
     await modal.present();
     await modal.onDidDismiss().then((data) => {

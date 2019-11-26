@@ -14,6 +14,7 @@ export class EditProfilePage implements OnInit {
 
   private id;
   private icon = '../../../assets/icons/eye-regular.svg';
+  private typepassword = 'password';
 
   user = {
     user_id: '',
@@ -23,6 +24,7 @@ export class EditProfilePage implements OnInit {
     user_password: '',
     user_passwordDecrypted: '',
     user_birthdate: '',
+    user_birthdateFormated: '',
     user_country: '',
     user_phone: '',
     user_cpf: '',
@@ -84,7 +86,7 @@ export class EditProfilePage implements OnInit {
   formatDates() {
     let data = new Date(this.user.user_birthdate);
     let formatedDate = data.toLocaleDateString();
-    this.user.user_birthdate = formatedDate;
+    this.user.user_birthdateFormated = formatedDate;
   }
 
   formatCPF() {
@@ -143,24 +145,27 @@ export class EditProfilePage implements OnInit {
     await alert.present();
   }
 
-  submit() {
-    let body;
-
-    // CRIPTOGRAFIA DA SENHA
+  cryptoPassword() {
     let password = this.editProfileForm.value["password"];
     let pepper = this.editProfileForm.value["email"] + '28052018';
     let crypto = CryptoJS.AES.encrypt(password, pepper, {
       keySize: 128/8
     });
     this.editProfileForm.value["password"] = crypto.toString();
+    this.user.user_password = this.editProfileForm.value["password"];
+  }
+
+  submit() {
+    let body;
+
+    // CRIPTOGRAFIA DA SENHA
+    this.cryptoPassword();
+    
 
     body = {
       'user_name': this.editProfileForm.value["name"],
       'user_email': this.user.user_email,
-      'user_password': this.editProfileForm.value["password"],
-      'user_birthdate': this.user.user_birthdate,
-      'user_cpf': this.user.user_cpf,
-      'user_phone': this.user.user_phone,
+      'user_password': this.user.user_password,
       'user_zip': this.user.user_zip
     };
 
@@ -186,17 +191,17 @@ export class EditProfilePage implements OnInit {
     this.editProfileForm.controls["name"].patchValue(this.user.user_name);
     this.editProfileForm.controls["cpf"].patchValue(this.user.user_cpf);
     this.editProfileForm.controls["email"].patchValue(this.user.user_email);
-    this.editProfileForm.controls["password"].patchValue('••••••••••');
+    this.editProfileForm.controls["password"].patchValue(this.user.user_passwordDecrypted);
     this.editProfileForm.controls["phone"].patchValue(this.user.user_phone);
-    this.editProfileForm.controls["birthdate"].patchValue(this.user.user_birthdate);
+    this.editProfileForm.controls["birthdate"].patchValue(this.user.user_birthdateFormated);
   }
 
   togglePassword() {
-    if (this.editProfileForm.controls["password"].value == '••••••••••') {
-      this.editProfileForm.controls["password"].patchValue(this.user.user_passwordDecrypted);
+    if (this.typepassword == 'password') {
+      this.typepassword = 'text';
       this.icon = '../../../assets/icons/eye-slash-regular.svg';
     } else {
-      this.editProfileForm.controls["password"].patchValue('••••••••••');
+      this.typepassword = 'password';
       this.icon = '../../../assets/icons/eye-regular.svg';
     }
   }

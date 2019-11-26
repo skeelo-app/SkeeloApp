@@ -14,7 +14,7 @@
 
 <ion-content>
   <div search>
-    <ion-searchbar searchIcon="../../../assets/icons/search-solid.svg" placeholder="Pesquisar em {{store.store_displayname}}"></ion-searchbar>
+    <ion-searchbar (click)="search()" searchIcon="../../../assets/icons/search-solid.svg" placeholder="Pesquisar em {{store.store_displayname}}"></ion-searchbar>
   </div>
 
   <div class="category">

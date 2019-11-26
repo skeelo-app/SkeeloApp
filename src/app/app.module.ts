@@ -12,6 +12,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { ChangeCpfPageModule } from './pages/change-cpf/change-cpf.module';
 import { EditItemPageModule } from './pages/edit-item/edit-item.module';
+import { SearchResultPageModule } from './pages/search-result/search-result.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +27,8 @@ import { EditItemPageModule } from './pages/edit-item/edit-item.module';
     IonicStorageModule.forRoot(),
     HttpClientModule,
     ChangeCpfPageModule,
-    EditItemPageModule
+    EditItemPageModule,
+    SearchResultPageModule
   ],
   providers: [
     StatusBar,
