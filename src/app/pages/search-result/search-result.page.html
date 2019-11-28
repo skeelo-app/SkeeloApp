@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="return()" color="primary">
+        <ion-icon slot="icon-only" src="../../../assets/icons/chevron-left-solid.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-searchbar [(ngModel)]="search" searchIcon="../../../../assets/icons/search-solid.svg" placeholder="Pesquise em {{store.store_displayname}}" (ionChange)="filter()"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-virtual-scroll [items]="items">
+      <ion-item *virtualItem="let item">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="1.5" class="img ion-align-self-center">
+              <img src="../../../assets/img/figuresquare.svg" alt="">
+            </ion-col>
+            <ion-col size="7">
+              <ion-text class="text ion-text-start ion-align-self-center">
+                <p class="name">{{item.item_name}}</p>
+                <p class="subtitle">{{item.item_description}}</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="3">
+              <ion-text class="price ion-text-end ion-align-self-center">
+                <p>R${{item.item_price}}</p>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+  </ion-list>
+</ion-content>
