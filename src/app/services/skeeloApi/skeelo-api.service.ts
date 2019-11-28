@@ -83,6 +83,10 @@ export class SkeeloApiService {
     return this.http.get(this.apiUrl + 'items/id/' + id);
   }
 
+  getAllItemsByStore(id) {
+    return this.http.get(this.apiUrl + 'items/store/' + id);
+  }
+
   // LOCALIZAÇÃO
   getLocationByID(id) {
     return this.http.get(this.apiUrl + 'locations/id/' + id);
