@@ -16,7 +16,7 @@
       <ion-virtual-scroll [items]="stores">
         <ion-item *virtualItem="let store" [routerLink]="['/store', store.store_id]">
           <ion-avatar item-left>
-            <img src="../../../assets/img/figuresquare.svg" alt="">
+            <img src="{{store.store_imageurl}}" alt="">
           </ion-avatar>
           <p>{{store.store_displayname}}</p>
         </ion-item>

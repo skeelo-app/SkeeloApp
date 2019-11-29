@@ -190,19 +190,21 @@ export class SignUpPage implements OnInit {
 
   check() {
     
-    // FORMATAÇÃO DO CPF
-    let cpf = this.signUpForm.value["cpf"].replace(/\./g, '');
-    this.signUpForm.value["cpf"] = cpf.replace('-', '');
+    if (this.signUpForm.value["cpf"] != '') {
+      // FORMATAÇÃO DO CPF
+      let cpf = this.signUpForm.value["cpf"].replace(/\./g, '');
+      this.signUpForm.value["cpf"] = cpf.replace('-', '');
 
-    // VERIFICAÇÃO DO CPF
-    this.skeeloAPI.getUserByCpf(this.signUpForm.value['cpf'])
-    .subscribe(([result]: any) => {
-      if (result == undefined) {
-        this.equalCpf = false;
-      } else {
-        this.cpfUnique();
-      }
-    });
+      // VERIFICAÇÃO DO CPF
+      this.skeeloAPI.getUserByCpf(this.signUpForm.value['cpf'])
+      .subscribe(([result]: any) => {
+        if (result == undefined) {
+          this.equalCpf = false;
+        } else {
+          this.cpfUnique();
+        }
+      });
+    }
 
     // FORMATAÇÃO DO TELEFONE
     let phone = this.signUpForm.value["phone"].replace('(', '').replace(')', '').replace('-', '');

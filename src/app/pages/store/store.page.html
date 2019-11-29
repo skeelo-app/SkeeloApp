@@ -17,9 +17,15 @@
     <ion-searchbar (click)="search()" searchIcon="../../../assets/icons/search-solid.svg" placeholder="Pesquisar em {{store.store_displayname}}"></ion-searchbar>
   </div>
 
-  <div class="category">
-    <ion-text color="primary">
-      <p>Frutas</p>
-    </ion-text>
-  </div>
+  <ion-virtual-scroll [items]="categories">
+    <div class="category" *virtualItem="let category">
+      <ion-text color="primary">
+        <p>{{category.category_name}}</p>
+      </ion-text>
+      <ion-list>
+        
+      </ion-list>
+    </div>
+  </ion-virtual-scroll>
+
 </ion-content>
