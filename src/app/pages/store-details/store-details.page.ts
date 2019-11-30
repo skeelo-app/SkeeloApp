@@ -17,6 +17,7 @@ export class StoreDetailsPage implements OnInit {
     store_displayname: '',
     store_cnpj: '',
     store_phone: '',
+    store_imageurl: '',
     store_owner: '',
     store_location: '',
     store_rate: '',

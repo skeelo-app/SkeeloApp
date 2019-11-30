@@ -100,4 +100,11 @@ export class SkeeloApiService {
     return this.http.post(this.apiUrl + 'orderitems/create', body, {headers});
   }
 
+  // CATEGORIAS
+  getAllCategories() {
+    return this.http.get(this.apiUrl + 'categories/').pipe((value) => {
+      return value;
+    });
+  }
+
 }

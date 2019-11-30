@@ -19,6 +19,12 @@ export class StorePage implements OnInit {
     store_displayname: '',
   }
 
+  categories = {
+    category_id: '',
+    category_name: '',
+    category_description: ''
+  }
+
   constructor(
     private route: ActivatedRoute,
     private skeeloAPI: SkeeloApiService,
@@ -60,6 +66,14 @@ export class StorePage implements OnInit {
       this.id = +params['id'];
     });
     this.getStore();
+    this.getCategories();
+  }
+
+  getCategories() {
+    this.skeeloAPI.getAllCategories().subscribe((result: any) => {
+      console.log(result);
+      this.categories = result;
+    })
   }
 
 }
