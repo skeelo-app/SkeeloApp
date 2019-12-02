@@ -57,7 +57,9 @@
     </ion-text>
     <ion-card [routerLink]="lastOrder.order_progress == 4 ? ['/order-details', lastOrder.order_id] : ['/order-progress', lastOrder.order_id]">
       <ion-item lines="none">
-        <ion-img src="../../../../assets/img/figure.png"></ion-img>
+        <ion-col size="2.5">
+          <ion-img [src]="lastOrder.order_storeImage"></ion-img>
+        </ion-col>
         <ion-col>
           <ion-label color="primary">
             <ion-text class="ion-text-wrap">

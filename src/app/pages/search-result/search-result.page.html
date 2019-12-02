@@ -13,11 +13,11 @@
 <ion-content>
   <ion-list>
     <ion-virtual-scroll [items]="items">
-      <ion-item *virtualItem="let item">
+      <ion-item *virtualItem="let item" [routerLink]="['/item-details', item.item_id]" (click)="return()">
         <ion-grid>
           <ion-row class="ion-align-items-center">
-            <ion-col size="1.5" class="img ion-align-self-center">
-              <img src="../../../assets/img/figuresquare.svg" alt="">
+            <ion-col size="2" class="img ion-align-self-center">
+              <img src="{{item.item_imageurl}}" alt="">
             </ion-col>
             <ion-col size="7">
               <ion-text class="text ion-text-start ion-align-self-center">

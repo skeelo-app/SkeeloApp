@@ -17,15 +17,49 @@
     <ion-searchbar (click)="search()" searchIcon="../../../assets/icons/search-solid.svg" placeholder="Pesquisar em {{store.store_displayname}}"></ion-searchbar>
   </div>
 
-  <ion-virtual-scroll [items]="categories">
-    <div class="category" *virtualItem="let category">
-      <ion-text color="primary">
-        <p>{{category.category_name}}</p>
-      </ion-text>
-      <ion-list>
-        
+  <ion-virtual-scroll [items]="categories" approxItemHeight="400px">
+    <ion-list class="category" *virtualItem="let category">
+      <ion-list-header>
+        <ion-text color="primary">
+          <p>{{category.category_name}}</p>
+        </ion-text>
+      </ion-list-header>
+      <ion-list lines="full">
+        <ion-item *ngFor="let item of category.items" [routerLink]="['/item-details', item.item_id]" detail="false">
+          <ion-grid>
+            <ion-row class="ion-align-items-center">
+              <ion-col size="2" class="img ion-align-self-center">
+                <ion-thumbnail>
+                  <ion-img [src]="item.item_imageurl" alt=""></ion-img>
+                </ion-thumbnail>
+              </ion-col>
+              <ion-col size="6">
+                <ion-text class="text ion-text-start ion-align-self-center">
+                  <p class="name">{{item.item_name}}</p>
+                  <p class="subtitle">{{item.item_description}}</p>
+                </ion-text>
+              </ion-col>
+              <ion-col size="4">
+                <ion-text class="price ion-text-end ion-align-self-center">
+                  <p>{{item.item_price}}</p>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item>
+          <ion-grid>
+            <ion-row class="ion-text-end">
+              <ion-col class="ion-align-self-center">
+                <ion-text color="medium">
+                  <p class="subtitle">Ver mais</p>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
       </ion-list>
-    </div>
+    </ion-list>
   </ion-virtual-scroll>
 
 </ion-content>

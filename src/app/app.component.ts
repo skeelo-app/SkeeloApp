@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { StorageService } from './services/storageService/storage.service';
 
 @Component({
@@ -19,7 +19,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.initializeApp();
   }
@@ -30,8 +31,10 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       // this.statusBar.styleDefault();
-      this.statusBar.styleBlackTranslucent();
-      this.splashScreen.hide();
+      this.statusBar.backgroundColorByHexString('#1A87FF');
+      this.statusBar.overlaysWebView(false);
+      this.statusBar.styleDefault;
+      this.statusBar.show();
       this.storageService.setCart(this.cart);
       let settings = this.storageService.getUserSettings();
       if (settings != null) {
@@ -39,13 +42,14 @@ export class AppComponent {
           this.rootPage = '/intro';
           this.router.navigateByUrl(this.rootPage);
         } else {
-          // this.rootPage = '/tabs';
-          // this.router.navigateByUrl(this.rootPage);
+          this.rootPage = '/tabs';
+          this.router.navigateByUrl(this.rootPage);
         }
       } else {
-        // this.rootPage = '/tabs';
-        // this.router.navigateByUrl(this.rootPage);
+        this.rootPage = '/tabs';
+        this.router.navigateByUrl(this.rootPage);
       }
+      this.splashScreen.hide();
     });
   }
 }

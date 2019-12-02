@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SkeeloApiService } from 'src/app/services/skeeloApi/skeelo-api.service';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-intro',
@@ -9,8 +10,11 @@ import { SkeeloApiService } from 'src/app/services/skeeloApi/skeelo-api.service'
 export class IntroPage implements OnInit {
 
   constructor(
-    public skeeloAPI: SkeeloApiService
-  ) { }
+    public skeeloAPI: SkeeloApiService,
+    private statusBar: StatusBar
+  ) {
+    this.statusBar.backgroundColorByHexString('#1A87FF');
+  }
 
   ngOnInit() {
   }

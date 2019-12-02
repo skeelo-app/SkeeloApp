@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SkeeloApiService {
-  // private apiUrl = 'http://bicudo.sytes.net:3003/';
-  private apiUrl = 'http://localhost:3003/';
+  private apiUrl = 'http://bicudo.sytes.net:3003/';
+  // private apiUrl = 'http://localhost:3003/';
 
   constructor(
     private http: HttpClient
@@ -85,6 +85,10 @@ export class SkeeloApiService {
 
   getAllItemsByStore(id) {
     return this.http.get(this.apiUrl + 'items/store/' + id);
+  }
+
+  getAllItemsByStoreAndCategory(store, category) {
+    return this.http.get(this.apiUrl + 'items/store/' + store + '/category/' + category);
   }
 
   // LOCALIZAÇÃO

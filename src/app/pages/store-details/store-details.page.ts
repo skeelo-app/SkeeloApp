@@ -27,8 +27,9 @@ export class StoreDetailsPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private skeeloAPI: SkeeloApiService
-  ) { }
+    private skeeloAPI: SkeeloApiService,
+  ) {
+  }
 
   ngOnInit() {
   }

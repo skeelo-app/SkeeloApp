@@ -19,11 +19,14 @@ export class StorePage implements OnInit {
     store_displayname: '',
   }
 
-  categories = {
-    category_id: '',
-    category_name: '',
-    category_description: ''
-  }
+  categories = [
+    {
+      category_id: '',
+      category_name: '',
+      category_description: '',
+      items: []
+    }
+  ]
 
   constructor(
     private route: ActivatedRoute,
@@ -54,9 +57,9 @@ export class StorePage implements OnInit {
     this.presentModal(this.id);
   }
 
-  getStore() {
+  async getStore() {
     this.skeeloAPI.getStoreByID(this.id).subscribe(([result]: any) => {
-      // console.log(result);
+      console.log(result);
       this.store = result;
     })
   }
@@ -65,14 +68,32 @@ export class StorePage implements OnInit {
     this.route.params.subscribe(params => {
       this.id = +params['id'];
     });
-    this.getStore();
     this.getCategories();
+    this.getStore();
+  }
+  
+  async getItems() {
+    let length = this.categories.length;
+    for(let i = 0; i < length; i++) {
+      this.skeeloAPI.getAllItemsByStoreAndCategory(this.id, i).subscribe((result: any) => {
+        console.log('ID:', i)
+        console.log('PRODUTOS:', result);
+        this.categories[i].items = result;
+        for (let x = 0; x < result.length; x++) {
+          let value = parseFloat(result[x].item_price);
+          let formatedPrice = (value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', localeMatcher: 'lookup'});
+          this.categories[i].items[x].item_price = formatedPrice;
+          this.categories[i].items[x].item_name = result[x].item_name.toLowerCase();
+        }
+      })
+    }
   }
 
-  getCategories() {
+  async getCategories() {
     this.skeeloAPI.getAllCategories().subscribe((result: any) => {
       console.log(result);
       this.categories = result;
+      this.getItems();
     })
   }
 

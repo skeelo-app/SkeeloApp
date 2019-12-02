@@ -13,8 +13,9 @@ export class AppPreferencesPage implements OnInit {
   constructor(
     private storageService: StorageService,
     private router: Router,
-    public alertController: AlertController
-    ) { }
+    public alertController: AlertController,
+    ) {
+    }
     
   public darkMode: boolean;
   menu = [

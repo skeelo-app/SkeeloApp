@@ -11,8 +11,9 @@ export class OrdersPage implements OnInit {
 
   constructor(
     private skeeloAPI: SkeeloApiService,
-    private storageService: StorageService
-  ) { }
+    private storageService: StorageService,
+  ) {
+  }
 
   orders: any = [
     {

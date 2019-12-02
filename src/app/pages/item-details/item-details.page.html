@@ -11,7 +11,7 @@
   <ion-grid>
     <ion-row class="ion-align-items-center">
       <ion-col img class="ion-align-self-center">
-        <ion-img src="../../../assets/img/figurewithoutbg.svg"></ion-img>
+        <ion-img src="{{item.item_imageurl}}"></ion-img>
       </ion-col>
     </ion-row>
     <ion-row class="ion-align-items-center">
@@ -59,7 +59,9 @@
     </ion-row>
     <ion-row class="ion-align-items-center">
       <ion-col size="2">
-        <ion-img src="../../../assets/img/figure.svg"></ion-img>
+        <ion-avatar item-left>
+          <ion-img src="{{item.item_storeimageurl}}"></ion-img>
+        </ion-avatar>
       </ion-col>
       <ion-col>
         <ion-text color="primary" class="ion-text-wrap" [routerLink]="['/store', item.item_store]">

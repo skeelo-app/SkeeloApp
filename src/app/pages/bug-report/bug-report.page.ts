@@ -21,7 +21,7 @@ export class BugReportPage implements OnInit {
     private router: Router,
     private skeeloAPI: SkeeloApiService,
     private storageService: StorageService,
-    public alertController: AlertController
+    public alertController: AlertController,
   ) {
     this.bugForm = formBuilder.group({
       name: [{value: this.name, disabled: true}, Validators.required],

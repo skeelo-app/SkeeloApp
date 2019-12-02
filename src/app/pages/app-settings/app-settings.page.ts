@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppSettingsPage implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
   menu = [
     {

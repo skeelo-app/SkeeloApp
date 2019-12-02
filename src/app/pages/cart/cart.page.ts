@@ -4,6 +4,7 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storageService/storage.service';
 import { EditItemPage } from '../edit-item/edit-item.page';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cart',
@@ -22,29 +23,48 @@ export class CartPage implements OnInit {
     public alertController: AlertController,
     public modalController: ModalController,
     private router: Router,
+    public loadingController: LoadingController
   ) { }
 
   ngOnInit() {
   }
 
-  getItemDetails() {
-    let length = this.items.length;
-    if (length > 0) {
-      this.emptyCart = false;
-    } else {
-      this.emptyCart = true;
-    }
-    for(let i = 0; i < length; i++) {
-      this.skeeloAPI.getItemByID(this.items[i].item_id).subscribe(([result]: any) => {
-        this.items[i].item_name = result.item_name;
-        this.items[i].item_unityPrice = result.item_price;
-        this.items[i].item_totalPrice = parseFloat(result.item_price) * this.items[i].item_quantity;
-        this.items.totalCart += this.items[i].item_totalPrice;
-        let formatedPrice = (this.items[i].item_totalPrice).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        this.items[i].item_totalPrice = formatedPrice;
-        let total = (this.items.totalCart).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        this.items.totalCartFormat = total;
-      });
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Carregando',
+    });
+    await loading.present();
+    this.showCart();
+  }
+
+  async dismissLoading() {
+    await this.loadingController.dismiss();
+  }
+
+  async getItemDetails(): Promise<boolean> {
+    try {
+      let length = this.items.length;
+      if (length > 0) {
+        this.emptyCart = false;
+      } else {
+        this.emptyCart = true;
+      }
+      this.items.totalCart = 0;
+      for(let i = 0; i < length; i++) {
+        await this.skeeloAPI.getItemByID(this.items[i].item_id).subscribe(([result]: any) => {
+          this.items[i].item_name = result.item_name;
+          this.items[i].item_unityPrice = result.item_price;
+          this.items[i].item_totalPrice = parseFloat(result.item_price) * this.items[i].item_quantity;
+          this.items.totalCart += this.items[i].item_totalPrice;
+          let formatedPrice = (this.items[i].item_totalPrice).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+          this.items[i].item_totalPrice = formatedPrice;
+          let total = (this.items.totalCart).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+          this.items.totalCartFormat = total;
+        });
+      }
+      return true
+    } catch (err) {
+      return false;
     }
   }
 
@@ -117,12 +137,29 @@ export class CartPage implements OnInit {
   showCart() {
     this.items = this.storageService.getCart();
     this.items.totalCart = 0;
-    this.getItemDetails();
+    this.getItemDetails().then((value) => {
+      this.loadingController.dismiss()
+      if (value == true) {
+        
+      } else {
+
+      }
+    })
     console.log(this.items);
   }
 
+  doRefresh(event) {
+    this.presentLoading();
+    this.getItemDetails().then((value) => {
+      setTimeout(() => {
+        console.log('Async operation has ended');
+        event.target.complete();
+      }, 200);
+    })
+  }
+
   ionViewWillEnter() {
-    this.showCart();
+    this.presentLoading();
   }
 
 }

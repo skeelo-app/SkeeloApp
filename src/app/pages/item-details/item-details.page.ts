@@ -26,7 +26,9 @@ export class ItemDetailsPage implements OnInit {
   item = {
     item_id: '',
     item_store: '',
+    item_imageurl: '',
     item_storename: '',
+    item_storeimageurl: '',
     item_barcode: '',
     item_category: '',
     item_name: '',
@@ -70,6 +72,7 @@ export class ItemDetailsPage implements OnInit {
   getStoreName() {
     this.skeeloAPI.getStoreByID(this.item.item_store).subscribe(([result]: any) => {
       this.item.item_storename = result.store_displayname;
+      this.item.item_storeimageurl = result.store_imageurl;
     });
   }
 
@@ -173,13 +176,17 @@ export class ItemDetailsPage implements OnInit {
         if (result.item_store == this.item.item_store) {
           // console.log('2 IF');
           // console.log('STORE:', result.item_store);
+          let x = 0;
           for (let i = 0; i < this.cart; i++) {
             // VERIFICA SE O PRODUTO JÁ EXISTE NO CARRINHO
             if (cartArray[i].item_id == this.item.item_id) {
               // console.log('3 IF');
               // console.log('CONTADOR: ', i);
               // console.log('VALOR DO ARRAY: ', cartArray[i]);
-              this.alertExists();
+              if (x == 0) {
+                this.alertExists();
+              }
+              x++
               // console.log(cartArray);
             } else if (i + 1 == this.cart) {
               // console.log('3 ELSE');

@@ -63,6 +63,7 @@ export class HomePage implements OnInit {
     order_id: '',
     order_storeId: '',
     order_storeName: '',
+    order_storeImage: '',
     order_date: '',
     order_items: '',
     order_price: '',
@@ -108,6 +109,7 @@ export class HomePage implements OnInit {
   getStore(id) {
     this.skeeloAPI.getStoreByID(id).subscribe(([result]: any) => {
       this.lastOrder.order_storeName = result.store_displayname;
+      this.lastOrder.order_storeImage = result.store_imageurl;
     });
   }
 
