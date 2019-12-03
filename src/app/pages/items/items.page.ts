@@ -46,7 +46,7 @@ export class ItemsPage implements OnInit {
   }
 
   async getItems() {
-    this.skeeloAPI.getAllItems().subscribe((result) => {
+    this.skeeloAPI.getAllItems().subscribe((result: any) => {
       this.items = [];
       this.completeList = result;
       let length = result.length;

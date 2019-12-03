@@ -66,10 +66,12 @@ export class HomePage implements OnInit {
     let settings = this.storageService.getUserSettings();
     console.log(settings);
     if (settings != null) {
+      this.getID();
       this.getUserInfo(this.user.user_id);
       this.getLastOrder(this.user.user_id);
     } else {
       this.router.navigateByUrl('/intro');
+      this.loadingController.dismiss();
     }
     if(this.lastOrder == undefined) {
       this.showLastOrder = true;
@@ -164,7 +166,6 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.getID();
   }
 
   ionViewWillEnter() {
