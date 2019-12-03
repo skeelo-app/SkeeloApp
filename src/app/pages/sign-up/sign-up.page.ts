@@ -189,6 +189,7 @@ export class SignUpPage implements OnInit {
   }
 
   check() {
+    console.log('check');
     
     if (this.signUpForm.value["cpf"] != '') {
       // FORMATAÇÃO DO CPF
@@ -204,6 +205,8 @@ export class SignUpPage implements OnInit {
           this.cpfUnique();
         }
       });
+    } else {
+      this.equalCpf = false;
     }
 
     // FORMATAÇÃO DO TELEFONE
@@ -230,6 +233,7 @@ export class SignUpPage implements OnInit {
       }
     });
     if (this.equalCpf == false && this.equalPhone == false && this.equalEmail == false) {
+      console.log('submit');
       this.submit();
     }
   }

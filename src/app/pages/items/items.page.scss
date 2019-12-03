@@ -1,5 +1,5 @@
 :host {
-	ion-toolbar {
+  ion-toolbar {
     -webkit-padding-start: 0px;
     -webkit-padding-end: 8px;
     padding-top: 12px;
@@ -24,8 +24,11 @@
     ion-item {
       ion-grid {
         padding: 0;
+        ion-col {
+          padding: 0;
+        }
       }
-      ion-text.text {
+      ion-text {
         p.name {
           color: var(--ion-color-dark);
           text-transform: capitalize;
@@ -36,11 +39,21 @@
           overflow: hidden;
           word-wrap: break-word;
         }
-      }
-      ion-text.price {
-        p {
+        p.price {
           font-weight: 500;
           margin: 0;
+        }
+        p.store {
+          color: var(--ion-color-medium);
+          text-transform: uppercase;
+          width: 100%;
+          margin: 0;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          word-wrap: break-word;
+          font-weight: 600;
+          font-size: 13px;
         }
       }
     }

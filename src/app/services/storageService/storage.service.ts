@@ -7,8 +7,13 @@ export class StorageService {
 
   constructor() { }
 
-  setUserSettings(userSettings) {
-    localStorage.setItem('userSettings', JSON.stringify(userSettings));
+  async setUserSettings(userSettings): Promise<boolean> {
+    try {
+      localStorage.setItem('userSettings', JSON.stringify(userSettings));
+      return true;
+    } catch(err) {
+      return false;
+    }
   }
 
   getUserSettings() {

@@ -13,21 +13,20 @@
 <ion-content>
   <ion-list>
     <ion-virtual-scroll [items]="items">
-      <ion-item *virtualItem="let item" [routerLink]="['/item-details', item.item_id]" (click)="return()">
+      <ion-item *virtualItem="let item" [routerLink]="['/item-details', item.item_id]" detail="false" (click)="return()">
+        <ion-avatar slot="start">
+          <img [src]="item.item_imageurl" alt="">
+        </ion-avatar>
         <ion-grid>
-          <ion-row class="ion-align-items-center">
-            <ion-col size="2" class="img ion-align-self-center">
-              <img src="{{item.item_imageurl}}" alt="">
-            </ion-col>
-            <ion-col size="7">
-              <ion-text class="text ion-text-start ion-align-self-center">
+          <ion-row>
+            <ion-col size="7" class="ion-align-self-center">
+              <ion-text class="text ion-text-start">
                 <p class="name">{{item.item_name}}</p>
-                <p class="subtitle">{{item.item_description}}</p>
               </ion-text>
             </ion-col>
-            <ion-col size="3">
-              <ion-text class="price ion-text-end ion-align-self-center">
-                <p>R${{item.item_price}}</p>
+            <ion-col size="5" class="ion-align-self-center">
+              <ion-text class="price ion-text-end">
+                <p>{{item.item_price}}</p>
               </ion-text>
             </ion-col>
           </ion-row>

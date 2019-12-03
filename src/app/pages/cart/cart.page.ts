@@ -149,8 +149,7 @@ export class CartPage implements OnInit {
   }
 
   doRefresh(event) {
-    this.presentLoading();
-    this.getItemDetails().then((value) => {
+    this.presentLoading().then((value) => {
       setTimeout(() => {
         console.log('Async operation has ended');
         event.target.complete();

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SkeeloApiService } from 'src/app/services/skeeloApi/skeelo-api.service';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, LoadingController } from '@ionic/angular';
 import { SearchResultPage } from '../search-result/search-result.page';
 
 @Component({
@@ -32,7 +32,8 @@ export class StorePage implements OnInit {
     private route: ActivatedRoute,
     private skeeloAPI: SkeeloApiService,
     public alertController: AlertController,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private loadingController: LoadingController
   ) { }
 
   async presentModal(store) {
@@ -59,7 +60,7 @@ export class StorePage implements OnInit {
 
   async getStore() {
     this.skeeloAPI.getStoreByID(this.id).subscribe(([result]: any) => {
-      console.log(result);
+      // console.log(result);
       this.store = result;
     })
   }
@@ -68,33 +69,72 @@ export class StorePage implements OnInit {
     this.route.params.subscribe(params => {
       this.id = +params['id'];
     });
+    this.presentLoading();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Carregando',
+    });
+    await loading.present();
     this.getCategories();
     this.getStore();
+  }
+
+  async dismissLoading() {
+    await this.loadingController.dismiss();
+  }
+
+  doRefresh(event) {
+    this.presentLoading().then((value) => {
+      setTimeout(() => {
+        event.target.complete();
+      }, 200);
+    });
   }
   
   async getItems() {
     let length = this.categories.length;
     for(let i = 0; i < length; i++) {
       this.skeeloAPI.getAllItemsByStoreAndCategory(this.id, i).subscribe((result: any) => {
-        console.log('ID:', i)
-        console.log('PRODUTOS:', result);
-        this.categories[i].items = result;
-        for (let x = 0; x < result.length; x++) {
+        for (let x = 0; x < 5; x++) {
+          // console.log('ID:', i)
+          // console.log('PRODUTOS:', result);
+          this.categories[i].items = result;
+          // console.log('ITEMS:', this.categories[i].items[x]);
           let value = parseFloat(result[x].item_price);
           let formatedPrice = (value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', localeMatcher: 'lookup'});
           this.categories[i].items[x].item_price = formatedPrice;
           this.categories[i].items[x].item_name = result[x].item_name.toLowerCase();
         }
+        this.categories[i].items.splice(5);
       })
     }
+    this.loadingController.dismiss();
+    // this.formatCategories();
   }
 
   async getCategories() {
     this.skeeloAPI.getAllCategories().subscribe((result: any) => {
-      console.log(result);
+      // console.log(result);
       this.categories = result;
       this.getItems();
     })
+  }
+
+  async formatCategories() {
+    let length = this.categories.length;
+    for(let i = 0; i < length; i++) {
+      console.log(this.categories[i]);
+      if(this.categories[i].items == undefined || this.categories[i].items.length === 0) {
+        console.log("CATEGORIA", i);
+        if (i == 0) {
+          this.categories.splice(0, 1);
+        } else {
+          this.categories.splice(i, i);
+        }
+      }
+    }
   }
 
 }

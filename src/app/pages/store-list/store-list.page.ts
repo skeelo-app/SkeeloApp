@@ -34,8 +34,7 @@ export class StoreListPage implements OnInit {
   }
 
   doRefresh(event) {
-    this.presentLoading();
-    this.getStores().then((value) => {
+    this.presentLoading().then((value) => {
       setTimeout(() => {
         event.target.complete();
       }, 200);

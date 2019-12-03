@@ -67,8 +67,7 @@ export class OrderProgressPage implements OnInit {
   }
 
   doRefresh(event) {
-    this.presentLoading();
-    this.getOrderDetails().then((value) => {
+    this.presentLoading().then((value) => {
       setTimeout(() => {
         event.target.complete();
       }, 200);
@@ -105,7 +104,9 @@ export class OrderProgressPage implements OnInit {
   }
 
   setProgressText() {
-    if(this.progress == 0.25) {
+    if (this.progress == 0) {
+      this.progressText = 'Seu pedido foi recebido pelo estabelecimento.';
+    } else if(this.progress == 0.25) {
       this.progressText = 'Seu pedido foi aceito pelo estabelecimento.';
     } else if(this.progress == 0.5) {
       this.progressText = 'Seu pedido está sendo preparado.';

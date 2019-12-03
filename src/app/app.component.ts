@@ -40,15 +40,13 @@ export class AppComponent {
       if (settings != null) {
         if (settings.showIntro || settings.showIntro == null) {
           this.rootPage = '/intro';
-          this.router.navigateByUrl(this.rootPage);
         } else {
           this.rootPage = '/tabs';
-          this.router.navigateByUrl(this.rootPage);
         }
       } else {
         this.rootPage = '/tabs';
-        this.router.navigateByUrl(this.rootPage);
       }
+      this.router.navigateByUrl(this.rootPage);
       this.splashScreen.hide();
     });
   }

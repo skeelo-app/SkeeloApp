@@ -37,7 +37,7 @@
       </ion-row>
     </ion-grid>
   </div>
-  <div class="details">
+  <div class="details" *ngIf="progress != 0">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -95,11 +95,11 @@
                   </ion-text>
                   <ion-skeleton-text *ngIf="!order.order_store.store_displayname" animated style="width: 50%"></ion-skeleton-text>
                 </ion-col>
-                <ion-col size="3">
+                <!-- <ion-col size="3">
                   <ion-text color="primary">
                     <p>Ligar</p>
                   </ion-text>
-                </ion-col>
+                </ion-col> -->
               </ion-row>
             </ion-grid>
           </ion-item>

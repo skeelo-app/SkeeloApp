@@ -66,8 +66,7 @@ export class OrderDetailsPage implements OnInit {
   }
 
   doRefresh(event) {
-    this.presentLoading();
-    this.getOrderDetails().then((value) => {
+    this.presentLoading().then((value) => {
       setTimeout(() => {
         event.target.complete();
       }, 200);

@@ -33,48 +33,42 @@
     ion-list {
       margin-bottom: 0;
       ion-item {
-        --padding-start: 0px;
-        ion-grid {
-          padding: 0;
-          ion-col {
-            padding: 0;
-          }
-          ion-col.img {
-            width: auto;
-            ion-thumbnail {
-              --size: 48px;
-              margin: 0 !important;
-            }
-            img {
-              width: 100%;
-            }
-          }
+        ion-avatar {
+          --size: 48px;
+          margin: 0 !important;
         }
+        img {
+          width: 90%;
+        }
+        --padding-start: 0px;
         ion-text.text {
           p.name {
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 100%;                   
-            overflow: hidden;
-            margin: 0;
             color: var(--ion-color-dark);
             text-transform: capitalize;
+            width: 100%;
+            margin: 0;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            word-wrap: break-word;
           }
           p.subtitle {
             color: var(--ion-color-medium);
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 100%;                   
-            overflow: hidden;
+            width: 100%;
             text-transform: uppercase;
-            margin: 0;
             font-size: 12px;
             font-weight: 300;
+            margin: 0;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            word-wrap: break-word;
           }
         }
         ion-text.price {
           p {
             font-weight: 500;
+            margin: 0;
           }
         }
       }

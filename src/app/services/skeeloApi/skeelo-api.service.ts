@@ -91,6 +91,10 @@ export class SkeeloApiService {
     return this.http.get(this.apiUrl + 'items/store/' + store + '/category/' + category);
   }
 
+  getAllItems() {
+    return this.http.get(this.apiUrl + 'items');
+  }
+
   // LOCALIZAÇÃO
   getLocationByID(id) {
     return this.http.get(this.apiUrl + 'locations/id/' + id);
@@ -109,6 +113,10 @@ export class SkeeloApiService {
     return this.http.get(this.apiUrl + 'categories/').pipe((value) => {
       return value;
     });
+  }
+
+  getCategoryByID(id) {
+    return this.http.get(this.apiUrl + 'categories/id/' + id);
   }
 
 }

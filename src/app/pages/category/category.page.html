@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="white">
+    <ion-buttons slot="start">
+      <ion-back-button text="" color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary">{{category.category_name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Puxe para atualizar"
+      refreshingSpinner="crescent"
+      refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list lines="full">
+    <ion-list-header>
+      <ion-text color="medium">
+        <p>{{category.category_description}}</p>
+      </ion-text>
+    </ion-list-header>
+    <ion-virtual-scroll [items]="items" approxItemHeight="400px">
+      <ion-item *virtualItem="let item" [routerLink]="['/item-details', item.item_id]" detail="false">
+        <ion-avatar slot="start">
+          <img [src]="item.item_imageurl" alt="">
+        </ion-avatar>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="7" class="ion-align-self-center">
+              <ion-text class="text ion-text-start">
+                <p class="name">{{item.item_name}}</p>
+              </ion-text>
+            </ion-col>
+            <ion-col size="5" class="ion-align-self-center">
+              <ion-text class="price ion-text-end">
+                <p>{{item.item_price}}</p>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col class="ion-align-self-center">
+            <ion-thumbnail>
+              <ion-img [src]="storeInfo.store_imageurl"></ion-img>
+            </ion-thumbnail>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>

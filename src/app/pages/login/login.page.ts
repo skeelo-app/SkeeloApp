@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SkeeloApiService } from 'src/app/services/skeeloApi/skeelo-api.service';
@@ -16,14 +16,15 @@ export class LoginPage implements OnInit {
   @ViewChild(IonSlides, {static: false}) slides: IonSlides;
 
   public loginForm: FormGroup;
-  private id;
+  public id;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private skeeloAPI: SkeeloApiService,
     public alertController: AlertController,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private navCtrl: NavController
   ) {
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose(
@@ -69,19 +70,7 @@ export class LoginPage implements OnInit {
         {
           text: 'OK',
           handler: () => {
-            this.router.navigateByUrl('/tabs');
-            let userSettings = {
-              'showIntro': false,
-              'id': this.id,
-              'darkMode': false,
-              'notifications': {
-                'push': true,
-                'email': true,
-                'whatsApp': true,
-                'SMS': true
-              }
-            }
-            this.storageService.setUserSettings(userSettings);
+            this.router.navigateByUrl('/tabs/home');
           }
         }
       ]
@@ -93,6 +82,15 @@ export class LoginPage implements OnInit {
   async wrongPassword() {
     const alert = await this.alertController.create({
       message: 'Senha incorreta!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async tryAgain() {
+    const alert = await this.alertController.create({
+      message: 'Não foi possível realizar o login! Tente novamente.',
       buttons: ['OK']
     });
 
@@ -129,7 +127,25 @@ export class LoginPage implements OnInit {
           this.decrypt(crypto);
           if(this.decrypted == this.loginForm.value['password']) {
             this.id = result.user_id;
-            this.alertSuccess();
+            let userSettings = {
+              'showIntro': false,
+              'id': this.id,
+              'darkMode': false,
+              'notifications': {
+                'push': true,
+                'email': true,
+                'whatsApp': true,
+                'SMS': true
+              }
+            }
+            console.log(userSettings);
+            this.storageService.setUserSettings(userSettings).then((value) => {
+              if (value) {
+                this.alertSuccess();
+              } else {
+                this.tryAgain();
+              }
+            })
           } else {
             this.wrongPassword();
           }

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="return()" color="primary">
+        <ion-icon slot="icon-only" src="../../../assets/icons/chevron-left-solid.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-searchbar [(ngModel)]="search" searchIcon="../../../../assets/icons/search-solid.svg" placeholder="Pesquise por qualquer produto" (ionChange)="filter()"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Puxe para atualizar"
+      refreshingSpinner="crescent"
+      refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="margin-top">
+    <ion-list>
+      <ion-virtual-scroll [items]="items">
+        <ion-item *virtualItem="let item" [routerLink]="['/item-details', item.item_id]" detail="false">
+          <ion-avatar slot="start">
+            <img [src]="item.item_imageurl" alt="">
+          </ion-avatar>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="5" push="0.5" class="ion-align-self-center">
+                <ion-text class="ion-text-start">
+                  <p class="name">{{item.item_name}}</p>
+                </ion-text>
+              </ion-col>
+              <ion-col size="6" push="0.5" class="ion-align-self-center">
+                <ion-text class="ion-text-end">
+                  <p class="price">{{item.item_price}}</p>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-align-self-center">
+                <ion-text class="ion-text-start">
+                  <p class="store">no {{item.item_storeDetails.store_displayname}}</p>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-virtual-scroll>
+    </ion-list>
+  </div>
+</ion-content>

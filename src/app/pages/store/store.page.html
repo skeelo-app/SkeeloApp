@@ -13,6 +13,14 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Puxe para atualizar"
+      refreshingSpinner="crescent"
+      refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
   <div search>
     <ion-searchbar (click)="search()" searchIcon="../../../assets/icons/search-solid.svg" placeholder="Pesquisar em {{store.store_displayname}}"></ion-searchbar>
   </div>
@@ -26,28 +34,25 @@
       </ion-list-header>
       <ion-list lines="full">
         <ion-item *ngFor="let item of category.items" [routerLink]="['/item-details', item.item_id]" detail="false">
+          <ion-avatar slot="start">
+            <img [src]="item.item_imageurl" alt="">
+          </ion-avatar>
           <ion-grid>
-            <ion-row class="ion-align-items-center">
-              <ion-col size="2" class="img ion-align-self-center">
-                <ion-thumbnail>
-                  <ion-img [src]="item.item_imageurl" alt=""></ion-img>
-                </ion-thumbnail>
-              </ion-col>
-              <ion-col size="6">
-                <ion-text class="text ion-text-start ion-align-self-center">
+            <ion-row>
+              <ion-col size="5" push="0.5" class="ion-align-self-center">
+                <ion-text class="text ion-text-start">
                   <p class="name">{{item.item_name}}</p>
-                  <p class="subtitle">{{item.item_description}}</p>
                 </ion-text>
               </ion-col>
-              <ion-col size="4">
-                <ion-text class="price ion-text-end ion-align-self-center">
+              <ion-col size="6" push="0.5" class="ion-align-self-center">
+                <ion-text class="price ion-text-end">
                   <p>{{item.item_price}}</p>
                 </ion-text>
               </ion-col>
             </ion-row>
           </ion-grid>
         </ion-item>
-        <ion-item>
+        <ion-item  [routerLink]="['/store', store.store_id, 'category', category.category_id]">
           <ion-grid>
             <ion-row class="ion-text-end">
               <ion-col class="ion-align-self-center">

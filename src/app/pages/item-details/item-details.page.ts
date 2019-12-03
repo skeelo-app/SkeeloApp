@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SkeeloApiService } from 'src/app/services/skeeloApi/skeelo-api.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storageService/storage.service';
 
 @Component({
@@ -20,7 +20,8 @@ export class ItemDetailsPage implements OnInit {
     private skeeloAPI: SkeeloApiService,
     private storageService: StorageService,
     public alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private loadingController: LoadingController
   ) { }
 
   item = {
@@ -47,6 +48,26 @@ export class ItemDetailsPage implements OnInit {
   ngOnInit() {
   }
 
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Carregando',
+    });
+    await loading.present();
+    this.getItemDetails();
+  }
+
+  async dismissLoading() {
+    await this.loadingController.dismiss();
+  }
+
+  doRefresh(event) {
+    this.presentLoading().then((value) => {
+      setTimeout(() => {
+        event.target.complete();
+      }, 200);
+    });
+  }
+
   getItemDetails(){
     this.skeeloAPI.getItemByID(this.id).subscribe(([result]: any) => {
       this.item.item_id = this.id;
@@ -67,6 +88,7 @@ export class ItemDetailsPage implements OnInit {
       this.item.item_cartPrice = result.item_price;
       this.item.item_cartCounter = 1;
     })
+    this.dismissLoading();
   }
 
   getStoreName() {
@@ -104,7 +126,7 @@ export class ItemDetailsPage implements OnInit {
     this.route.params.subscribe(params => {
       this.id = +params['id'];
     });
-    this.getItemDetails();
+    this.presentLoading();
   }
 
   async alertExists() {

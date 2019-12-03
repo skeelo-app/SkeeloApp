@@ -34,9 +34,16 @@ export class SearchResultPage implements OnInit {
   }
 
   getItems() {
-    this.skeeloAPI.getAllItemsByStore(this.store.store_id).subscribe((value) => {
-      this.items = value;
-      this.completeList = value;
+    this.skeeloAPI.getAllItemsByStore(this.store.store_id).subscribe((result: any) => {
+      this.items = result;
+      this.completeList = result;
+      let length = result.length;
+      for(let i = 0; i < length; i++) {
+        let value = parseFloat(result[i].item_price);
+        let formatedPrice = (value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', localeMatcher: 'lookup'});
+        this.items[i].item_price = formatedPrice;
+        this.items[i].item_name = result[i].item_name.toLowerCase();
+      }
       console.log(this.items);
     })
   }

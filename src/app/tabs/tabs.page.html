@@ -2,7 +2,7 @@
 
   <ion-tab-bar slot="bottom">
 
-    <ion-tab-button tab="search" layout="label-hide">
+    <!-- <ion-tab-button tab="search" layout="label-hide">
       <ion-icon src="../../../assets/icons/search-light.svg"></ion-icon>
       <ion-label>Search</ion-label>
     </ion-tab-button>
@@ -10,17 +10,17 @@
     <ion-tab-button tab="locations" layout="label-hide">
       <ion-icon src="../../../assets/icons/compass-light.svg"></ion-icon>
       <ion-label>Locations</ion-label>
+    </ion-tab-button> -->
+
+    <ion-tab-button tab="cart" layout="label-hide">
+      <ion-icon src="../../../assets/icons/shopping-cart-light.svg"></ion-icon>
+      <ion-label>Cart</ion-label>
+      <ion-badge>{{cartBadge}}</ion-badge>
     </ion-tab-button>
 
     <ion-tab-button tab="home" layout="label-hide">
       <ion-icon src="../../../assets/icons/store-light.svg"></ion-icon>
       <ion-label>Home</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="cart" layout="label-hide">
-      <ion-icon src="../../../assets/icons/shopping-cart-light.svg"></ion-icon>
-      <ion-label>Home</ion-label>
-      <ion-badge>{{cartBadge}}</ion-badge>
     </ion-tab-button>
 
     <ion-tab-button tab="app-settings" layout="label-hide">
